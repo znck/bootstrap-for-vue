@@ -1,6 +1,6 @@
 <template>
   <button class="btn" :class="[styles]" role="button">
-    <icon v-if="icon" :type="icon" class="mr-2" /><slot>{{ value }}</slot>
+    <icon v-if="icon" :type="icon" class="mr-2"></icon><slot>{{ value }}</slot>
   </button>
 </template>
 

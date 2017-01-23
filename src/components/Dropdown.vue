@@ -1,6 +1,6 @@
 <template>
   <div :class="[`drop${type}`, (show ? 'show' :  '')]">
-    <slot />
+    <slot></slot>
 
     <div class="dropdown-menu" v-if="items.length">
       <div v-for="item in items" class="dropdown-item"

@@ -5,7 +5,7 @@
       </label>
       <search-field :id="id" class="form-control"
              @input="val => $emit('input', val)"
-             v-bind="{ value, required, autofocus, placeholder, suggestion }" />
+             v-bind="{ value, required, autofocus, placeholder, suggestion }"></search-field>
       <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
       <small v-if="subtitle" class="form-text text-muted">
         <slot name="subtitle">{{ subtitle }}</slot>

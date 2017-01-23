@@ -1,5 +1,5 @@
 <template>
-  <i class="fa" :class="[`fa-${type}`]" />
+  <i class="fa" :class="[`fa-${type}`]"></i>
 </template>
 
 <script>

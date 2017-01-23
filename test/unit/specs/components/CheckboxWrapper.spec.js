@@ -1,5 +1,5 @@
 import { render } from '../../util'
-import InputWrapper from 'src/components/InputWrapper.vue'
+import CheckboxWrapper from 'src/components/CheckboxWrapper.vue'
 import InputBox from 'src/components/InputBox.vue'
 
 function getComponent (ctx, template) {
@@ -10,17 +10,17 @@ function getComponent (ctx, template) {
         ok: false
       }
     },
-    components: {InputWrapper, InputBox}
+    components: {CheckboxWrapper, InputBox}
   })
 }
 
-describe('InputWrapper.vue', function () {
+describe('CheckboxWrapper.vue', function () {
   it('should render correctly', function () {
     const vm = getComponent(this, `
-        <input-wrapper title="Are you foo?">
+        <checkbox-wrapper title="Are you foo?">
           <input-box :radio="true" v-model="ok" title="Yes" />
           <input-box :radio="false" v-model="ok" title="No" />
-        </input-wrapper>
+        </checkbox-wrapper>
       `)
 
     vm.$('.form-group').should.exist
@@ -32,10 +32,10 @@ describe('InputWrapper.vue', function () {
 
   it('should render correctly for inline', function () {
     const vm = getComponent(this, `
-        <input-wrapper title="Are you foo?">
+        <checkbox-wrapper title="Are you foo?">
           <input-box :radio="true" v-model="ok" title="Yes" class="form-check-inline" />
           <input-box :radio="false" v-model="ok" title="No" class="form-check-inline" />
-        </input-wrapper>
+        </checkbox-wrapper>
       `)
 
     vm.$('.form-group').should.exist

@@ -1,6 +1,6 @@
 import Alert from './components/Alert.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
-import CheckboxWrapper from './components/InputWrapper.vue'
+import CheckboxWrapper from './components/CheckboxWrapper.vue'
 import Dropdown from './components/Dropdown.vue'
 import Icon from './components/Icon.vue'
 import InputBox from './components/InputBox.vue'

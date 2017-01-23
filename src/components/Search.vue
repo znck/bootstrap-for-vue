@@ -1,7 +1,7 @@
 <template>
   <div class="form-control input-search">
     <div class="input-search-placeholder">
-      <span v-if="isEmpty"><slot><icon type="search" /><input type="text" class="input-search-placeholder-proxy" :value="placeholder" readonly></slot></span>
+      <span v-if="isEmpty"><slot><icon type="search"></icon><input type="text" class="input-search-placeholder-proxy" :value="placeholder" readonly></slot></span>
     </div>
     <input type="text" class="input-search-suggestion" :value="suggestion" readonly v-if="!isEmpty && hasSuggestion && show">
     <input type="search" class="input-search-field" :value="value"

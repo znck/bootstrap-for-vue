@@ -1,13 +1,13 @@
 <template>
   <fieldset class="form-group">
     <legend class="wrapper-legend" v-if="title">{{ title }}</legend>
-    <slot/>
+    <slot></slot>
   </fieldset>
 </template>
 
 <script>
 export default {
-  name: 'InputWrapper',
+  name: 'CheckboxWrapper',
 
   props: {
     title: {

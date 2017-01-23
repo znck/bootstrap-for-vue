@@ -2,7 +2,7 @@
   <dropdown class="typeahead" v-bind="{ items, show, component, itemKey: suggestionValue }" @select="onItemSelected">
     <search-field v-bind="{ value, placeholder, suggestion }"
       @input="val => $emit('input', val)"
-      @focus="show = true" @blur="onBlur"><slot /></search-field>
+      @focus="show = true" @blur="onBlur"><slot></slot></search-field>
 
       <div slot="empty" class="px-3 text-muted">No results :(</div>
   </dropdown>
