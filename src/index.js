@@ -13,6 +13,7 @@ import Search from './components/Search.vue'
 import Typeahead from './components/Typeahead.vue'
 
 export const INPUT = {
+  CheckboxWrapper, // Wrapper for Box
   InputBox, // Checkbox & Radio
   InputButton, // Button
   InputSearch,
@@ -21,10 +22,9 @@ export const INPUT = {
   InputTypeahead
 }
 
-export const components = {
+export const OTHERS = {
   Alert,
   Breadcrumb,
-  CheckboxWrapper, // Wrapper for Box
   Dropdown,
   Icon,
   Search,
@@ -35,8 +35,16 @@ function each (obj, callback) {
   Object.keys(obj).forEach(key => callback(obj[key], key))
 }
 
+function installComponents(Vue, components) {
+  each(components, (component, name) => Vue.component(name, component))
+}
+
 function plugin (Vue, options = {}) {
-  each(INPUT, (component, name) => Vue.component(name, component))
+  installComponents(Vue, INPUT)
+
+  if (options.all) {
+    installComponents(Vue, OTHERS)
+  }
 }
 
 // Install by default if using the script tag
