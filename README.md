@@ -1,13 +1,13 @@
-# UIKit
+# bootstrap-for-vue
 
-[![npm](https://img.shields.io/npm/v/uikit.svg)](https://www.npmjs.com/package/uikit) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+[![npm](https://img.shields.io/npm/v/bootstrap-for-vue.svg)](https://www.npmjs.com/package/bootstrap-for-vue) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 
 > Bootstrap UI for Vue
 
 ## Installation
 
 ```bash
-npm install --save uikit
+npm install --save bootstrap-for-vue
 ```
 
 ## Usage
@@ -16,19 +16,19 @@ npm install --save uikit
 
 ```js
 import Vue from 'vue'
-import UIKit from 'uikit'
+import bootstrap-for-vue from 'bootstrap-for-vue'
 // You need a specific loader for CSS files like https://github.com/webpack/css-loader
-import 'uikit/dist/uikit.css'
+import 'bootstrap-for-vue/dist/bootstrap-for-vue.css'
 
-Vue.use(UIKit)
+Vue.use(bootstrap-for-vue)
 ```
 
 ### Browser
 
 ```html
 <!-- Include after Vue -->
-<link rel="stylesheet" href="uikit/dist/uikit.css"></link>
-<script src="uikit/dist/uikit.js"></script>
+<link rel="stylesheet" href="bootstrap-for-vue/dist/bootstrap-for-vue.css"></link>
+<script src="bootstrap-for-vue/dist/bootstrap-for-vue.js"></script>
 ```
 
 ## Development

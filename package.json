@@ -3,21 +3,23 @@
   "version": "0.1.0",
   "description": "Bootstrap UI for Vue",
   "author": "Rahul Kadyan <hi@znck.me>",
-  "main": "dist/uikit.umd.js",
-  "module": "dist/uikit.js",
-  "style": "dist/uikit.css",
+  "main": "dist/bootstrap-for-vue.umd.js",
+  "module": "dist/bootstrap-for-vue.js",
+  "style": "dist/bootstrap-for-vue.css",
   "scripts": {
     "build": "node build/build.js",
     "build:dll": "webpack --progress --config build/webpack.dll.config.js",
-    "postinstall": "npm run build:dll",
-    "lint": "npm run lint:js && npm run lint:css",
+    "postinstall": "yarn run build:dll",
+    "lint": "yarn run lint:js && yarn run lint:css",
     "lint:js": "eslint --ext js --ext jsx --ext vue src test/**/*.spec.js test/unit/*.js build",
     "lint:css": "stylelint src/**/*.{vue,css}",
     "lint:staged": "lint-staged",
-    "test": "npm run lint && npm run test:unit",
+    "test": "yarn run lint && yarn run test:unit",
     "test:unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "dev": "webpack-dashboard -- webpack-dev-server --config build/webpack.test.config.js --open",
-    "dev:coverage": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
+    "dev:coverage": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+
+    "prepublish": "yarn run build"
   },
   "lint-staged": {
     "*.{vue,js}": [
@@ -116,12 +118,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/znck/uikit.git"
+    "url": "git+https://github.com/znck/bootstrap-for-vue.git"
   },
   "bugs": {
-    "url": "https://github.com/znck/uikit/issues"
+    "url": "https://github.com/znck/bootstrap-for-vue/issues"
   },
-  "homepage": "https://github.com/znck/uikit#readme",
+  "homepage": "https://github.com/znck/bootstrap-for-vue#readme",
   "license": {
     "type": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"
