@@ -1,6 +1,6 @@
 {
   "name": "uikit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Bootstrap UI for Vue",
   "author": "Rahul Kadyan <hi@znck.me>",
   "main": "dist/uikit.umd.js",
