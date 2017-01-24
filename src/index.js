@@ -9,6 +9,7 @@ import InputSearch from './components/InputSearch.vue'
 import InputSelect from './components/InputSelect.vue'
 import InputText from './components/InputText.vue'
 import InputTypeahead from './components/InputTypeahead.vue'
+import Modal from './components/Modal.vue'
 import Search from './components/Search.vue'
 import Typeahead from './components/Typeahead.vue'
 
@@ -27,6 +28,7 @@ export const OTHERS = {
   Breadcrumb,
   Dropdown,
   Icon,
+  Modal,
   Search,
   Typeahead
 }

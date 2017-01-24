@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { ErrorBag } from 'src/mixins/formHelper'
 import { createVM } from './helpers/utils'
 
+export const $ = window.jquery
 
 export function makeErrors (items = {}) {
   return new ErrorBag(items)
