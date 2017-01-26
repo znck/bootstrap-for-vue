@@ -13,6 +13,12 @@ import Modal from './components/Modal.vue'
 import Search from './components/Search.vue'
 import Typeahead from './components/Typeahead.vue'
 
+import Tooltip from './directives/tooltip'
+
+export const DIRECTIVES = {
+  Tooltip
+}
+
 export const INPUT = {
   CheckboxWrapper, // Wrapper for Box
   InputBox, // Checkbox & Radio
@@ -43,6 +49,7 @@ function installComponents(Vue, components) {
 
 function plugin (Vue, options = {}) {
   installComponents(Vue, INPUT)
+  each(DIRECTIVES, (directive, name) => Vue.directive(name, directive))
 
   if (options.all) {
     installComponents(Vue, OTHERS)
