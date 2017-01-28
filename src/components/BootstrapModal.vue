@@ -43,7 +43,8 @@ export default {
     },
 
     open: {
-      type: Boolean
+      type: Boolean,
+      default: null
     }
   },
 
@@ -56,7 +57,7 @@ export default {
       const open = this.open
       const state = this.state
 
-      if (open !== undefined) return open
+      if (open !== null) return open
 
       return state
     }

@@ -1,3 +1,5 @@
+const $ = window.jQuery
+
 export default {
   bind (el, binding) {
     const tooltip = $(el).tooltip({

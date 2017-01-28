@@ -62,7 +62,7 @@ ${template}
   const vm = new Vue({
     el: context.DOMElement,
     data: {
-      visible: true
+      visible: false
     },
     computed: {
       containerClasses () {

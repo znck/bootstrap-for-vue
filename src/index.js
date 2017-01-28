@@ -9,7 +9,7 @@ import InputSearch from './components/InputSearch.vue'
 import InputSelect from './components/InputSelect.vue'
 import InputText from './components/InputText.vue'
 import InputTypeahead from './components/InputTypeahead.vue'
-import Modal from './components/Modal.vue'
+import Modal from './components/Modal'
 import Search from './components/Search.vue'
 import Typeahead from './components/Typeahead.vue'
 
@@ -50,6 +50,11 @@ function installComponents(Vue, components) {
 function plugin (Vue, options = {}) {
   installComponents(Vue, INPUT)
   each(DIRECTIVES, (directive, name) => Vue.directive(name, directive))
+
+
+  if (options.custom === true) {
+    Modal.props.custom.default = true
+  }
 
   if (options.all) {
     installComponents(Vue, OTHERS)
