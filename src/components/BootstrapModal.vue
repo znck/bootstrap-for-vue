@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script>
+<script lang="babel">
 export default {
   props: {
     enableFooter: {
@@ -39,7 +39,7 @@ export default {
     },
 
     size: {
-      type: String,
+      type: String
     },
 
     open: {
@@ -71,7 +71,7 @@ export default {
     },
 
     showModal () {
-      this.selector = $(this.$el)
+      this.selector = window.jQuery(this.$el)
       this.selector.modal()
       this.selector.on('hidden.bs.modal', () => {
         this.inDOM = false

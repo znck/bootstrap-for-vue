@@ -3,10 +3,10 @@
     <div :is="component" v-for="crumb in crumbs"
       class="breadcrumb-item" :to="crumb.link"
       active-class="active">{{ crumb.title }}</div>
-  </anv>
+  </nav>
 </template>
 
-<script>
+<script lang="babel">
 export default {
   props: {
     links: {

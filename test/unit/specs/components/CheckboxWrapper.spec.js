@@ -1,6 +1,6 @@
 import { render } from '../../util'
 import CheckboxWrapper from 'src/components/CheckboxWrapper.vue'
-import InputBox from 'src/components/InputBox.vue'
+import InputBox from 'src/components/InputBox'
 
 function getComponent (ctx, template) {
   return render(ctx, {
@@ -10,7 +10,7 @@ function getComponent (ctx, template) {
         ok: false
       }
     },
-    components: {CheckboxWrapper, InputBox}
+    components: { CheckboxWrapper, InputBox }
   })
 }
 
@@ -23,7 +23,7 @@ describe('CheckboxWrapper.vue', function () {
         </checkbox-wrapper>
       `)
 
-    vm.$('.form-group').should.exist
+    vm.$el.should.exist
       .and.have.class('form-group')
 
     vm.$('legend').should.exist
@@ -38,10 +38,40 @@ describe('CheckboxWrapper.vue', function () {
         </checkbox-wrapper>
       `)
 
-    vm.$('.form-group').should.exist
+    vm.$el.should.exist
       .and.have.class('form-group')
 
     vm.$('legend').should.exist
       .and.have.text('Are you foo?')
+  })
+
+  it('should render correctly', function () {
+    const vm = getComponent(this, `
+        <checkbox-wrapper title="Are you foo?">
+          <input-box custom :radio="true" v-model="ok" title="Yes" />
+          <input-box custom :radio="false" v-model="ok" title="No" />
+        </checkbox-wrapper>
+      `)
+
+    // vm.$el.should.exist
+    //     .and.have.class('form-group')
+    //
+    // vm.$('legend').should.exist
+    //     .and.have.text('Are you foo?')
+  })
+
+  it('should render correctly for inline', function () {
+    const vm = getComponent(this, `
+        <checkbox-wrapper title="Are you foo?">
+          <input-box custom :radio="true" v-model="ok" title="Yes" class="form-check-inline" />
+          <input-box custom :radio="false" v-model="ok" title="No" class="form-check-inline" />
+        </checkbox-wrapper>
+      `)
+
+    // vm.$el.should.exist
+    //     .and.have.class('form-group')
+    //
+    // vm.$('legend').should.exist
+    //     .and.have.text('Are you foo?')
   })
 })

@@ -1,0 +1,62 @@
+html {
+  font-size: 14px;
+}
+
+
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/modal';
+@import '~bootstrap/scss/tooltip';
+
+$fa-font-path: '~font-awesome/fonts';
+
+#mocha li.test {
+  overflow: visible !important;
+}
+
+.test-component-container {
+  position: relative;
+  display: block;
+  clear: both;
+
+  > button {
+    position: absolute;
+    cursor: pointer;
+    top: -18px;
+    left: -24px;
+  }
+
+  > .test-output {
+    margin: 16px;
+
+    &:hover{
+      margin: 15px;
+      border: dashed 1px red;
+    }
+  }
+}
+
+.test-component-container {
+  > .test-output {
+
+    font-size: 14px;
+    font-family: sans-serif; // 1
+    line-height: 1.15; // 2
+    -ms-text-size-adjust: 100%; // 3
+    -webkit-text-size-adjust: 100%; // 3
+
+    box-sizing: border-box;
+
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    font-weight: $font-weight-base;
+    line-height: $line-height-base;
+    // Go easy on the eyes and use something other than `#000` for text
+    color: $body-color;
+    // By default, `<body>` has no `background-color` so we set one as a best practice.
+    background-color: $body-bg;
+
+    @import '~bootstrap/scss/bootstrap';
+    //@import '~font-awesome/scss/font-awesome';
+  }
+}

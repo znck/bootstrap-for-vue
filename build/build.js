@@ -5,39 +5,53 @@ const uglify = require('uglify-js')
 const CleanCSS = require('clean-css')
 const packageData = require('../package.json')
 const { version, author, name } = packageData
+
 // remove the email at the end
 const authorName = author.replace(/\s+<.*/, '')
 
+const path = require('path')
+const dirs = {
+  project: path.resolve(__dirname, '../'),
+  src: path.resolve(__dirname, '../src'),
+  dist: path.resolve(__dirname, '../dist'),
+  scss: path.resolve(__dirname, '../dist/scss')
+}
+
 const {
-  logError,
-  write,
-  processStyle
+    logError,
+    write
 } = require('./utils')
 
 const banner =
-      '/*!\n' +
-      ` * ${name} v${version}\n` +
-      ` * (c) ${new Date().getFullYear()} ${authorName}\n` +
-      ' * Released under the MIT License.\n' +
-      ' */'
+    '/*!\n' +
+    ` * ${name} v${version}\n` +
+    ` * (c) ${new Date().getFullYear()} ${authorName}\n` +
+    ' * Released under the MIT License.\n' +
+    ' */'
 
 rollup({
   entry: 'src/index.js',
   plugins: [
     vue({
       compileTemplate: true,
-      css (styles, stylesNodes) {
-        Promise.all(
-          stylesNodes.map(processStyle)
-        ).then(css => {
-          const result = css.map(c => c.css).join('')
-          // write the css for every component
-          // TODO add it back if we extract all components to individual js
-          // files too
-          // css.forEach(writeCss)
-          write(`dist/${name}.css`, result)
-          write(`dist/${name}.min.css`, new CleanCSS().minify(result).styles)
-        }).catch(logError)
+      cssModules: {
+        generateScopedName: 'bootstrap-for-vue-[name]-[local]'
+      },
+      css (_, styles) {
+        let combine = ''
+        const result = styles.map(style => {
+          const filename = style.id.replace(dirs.src, '').replace(/\.vue$/i, '.scss').replace(/^\//, '')
+
+          combine += '@import ' + JSON.stringify(`./${filename}`) + '\n'
+
+          write(path.resolve(dirs.scss, filename), style.code.trim())
+
+          return style.$compiled.code
+        }).join('\n')
+
+        write(path.resolve(dirs.scss, `${name}.scss`), combine)
+        write(path.resolve(dirs.dist, `${name}.css`), result)
+        write(path.resolve(dirs.dist, `${name}.min.css`), new CleanCSS().minify(result).styles)
       }
     }),
     buble({
@@ -57,9 +71,10 @@ rollup({
     banner: banner,
     moduleName: name
   }).code
-  return write(`dist/${name}.umd.js`, code).then(function () {
-    return code
-  })
+
+  write(`dist/${name}.umd.js`, code)
+
+  return code
 }).then(function (code) {
   var minified = uglify.minify(code, {
     fromString: true,
@@ -68,5 +83,5 @@ rollup({
       ascii_only: true
     }
   }).code
-  return write(`dist/${name}.umd.min.js`, minified)
+  write(`dist/${name}.umd.min.js`, minified)
 }).catch(logError)

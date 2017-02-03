@@ -1,37 +1,42 @@
 import Vue from 'vue'
 import { ErrorBag } from 'src/mixins/formHelper'
-import { createVM } from './helpers/utils'
 
-export const $ = window.jquery
+export function render (context, component) {
+  if (!context.DOM) {
+    const app = new Vue(component)
+    context.$ = app.$ = s => app.$el.querySelector(s)
+    context.tick = app.tick = () => new Promise(r => app.$nextTick(r))
 
-export function makeErrors (items = {}) {
-  return new ErrorBag(items)
-}
+    app.$mount()
 
-function mount (vm) {
-  vm.$ = function (selector) {
-    return this.$el.querySelector(selector)
+    return app
+  } else {
+    const app = new Vue({
+      el: context.DOM,
+      data () {
+        return { show: false }
+      },
+      template: `
+        <div id="${context.DOM.id}" class="test-component-container">
+            <button @click="show = !show" role="button">{{ show ? '-' : '+' }}</button>
+            <div class="test-output" v-show="show"><test-case></test-case></div>
+        </div>`,
+      components: {
+        TestCase: component
+      }
+    })
+
+    const vm = app.$children[0]
+
+    context.$app = app
+    context.$vm = vm
+    context.$ = vm.$ = s => vm.$el.querySelector(s)
+    context.tick = vm.tick = () => new Promise(r => app.$nextTick(r))
+
+    return vm
   }
-
-  vm.tick = function () {
-    return new Promise(resolve => this.$nextTick(resolve))
-  }
-
-  return vm
 }
 
-export function render (ctx, Component, data, parent = {}) {
-  return mount(
-    createVM(ctx, typeof Component === 'string' ? Component : function (h) {
-      return h(Component, data)
-    }, parent)
-  )
-}
-
-export function directive (name, expression, value) {
-  return { name, expression, value }
-}
-
-export function wait (milis) {
-  return new Promise(resolve => setTimeout(resolve, milis))
+export function makeErrors (any) {
+  return new ErrorBag(any)
 }

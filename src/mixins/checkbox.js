@@ -1,14 +1,3 @@
-<template>
-  <div class="form-check" :class="{ 'has-danger': feedback }">
-    <label class="custom-control" :class="[`custom-${type}`]">
-      <input v-bind="{ type, required, name: nameKey }" class="custom-control-input" :checked="state" @change="onChange" hidden>
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description" v-if="title">{{ title }}</span>
-    </label>
-  </div>
-</template>
-
-<script>
 import { isArray } from '../utils'
 import inputHelper from '../mixins/inputHelper'
 
@@ -27,6 +16,11 @@ export default {
 
     checkbox: {
       default: true
+    },
+
+    inline: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -134,13 +128,3 @@ export default {
 
   mixins: [inputHelper]
 }
-</script>
-
-<style>
-span.custom-control-indicator {
-  top: 0.2rem;
-}
-.custom-control-description {
-  user-select: none;
-}
-</style>

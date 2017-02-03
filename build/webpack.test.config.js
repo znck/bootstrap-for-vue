@@ -33,7 +33,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.jsx', 'css'],
     alias: {
-      'src': path.resolve(__dirname, '../src')
+      'src': path.resolve(__dirname, '../src'),
+      'vue$': 'vue/dist/vue.common.js'
     }
   },
   module: {
@@ -50,7 +51,13 @@ module.exports = {
         test: /.vue$/,
         loader: 'vue-loader',
         options: {
-          postcss: [require('postcss-cssnext')()]
+          loaders: {
+            scss: 'vue-style-loader!css-loader!sass-loader'
+          },
+          postcss: [require('postcss-cssnext')()],
+          cssModules: {
+            modules: false
+          }
         }
       }
     ]

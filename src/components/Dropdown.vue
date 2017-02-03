@@ -1,16 +1,19 @@
 <template>
-  <div :class="[`drop${type}`, (show ? 'show' :  '')]">
-    <slot></slot>
+<div :class="[`drop${type}`, (show ? 'show' :  '')]">
+  <slot></slot>
 
-    <div class="dropdown-menu" v-if="items.length">
+  <div class="dropdown-menu" v-if="items.length">
+    <slot name="items">
       <div v-for="item in items" class="dropdown-item"
-        @click.prevent="$emit('select', item)" :is="component"
-        :item="item" :key="item">{{ item[itemKey] }}</div>
-    </div>
-    <div class="dropdown-menu" v-else>
-      <slot name="empty"></slot>
-    </div>
+           @click.prevent="$emit('select', item)" :is="component"
+           :item="item" :key="item">{{ item[itemKey] }}
+      </div>
+    </slot>
   </div>
+  <div class="dropdown-menu" v-else>
+    <slot name="empty"></slot>
+  </div>
+</div>
 </template>
 
 <script>
@@ -44,10 +47,13 @@ export default {
     }
   }
 }
+
 </script>
 
-<style>
-  .dropdown-menu a.dropdown-item {
+<style lang="scss" module>
+.dropdown-menu {
+  a.dropdown-item {
     cursor: pointer;
   }
+}
 </style>

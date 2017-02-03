@@ -1,11 +1,13 @@
 <template>
-  <dropdown class="typeahead" v-bind="{ items, show, component, itemKey: suggestionValue }" @select="onItemSelected">
-    <search-field v-bind="{ value, placeholder, suggestion }"
-      @input="val => $emit('input', val)"
-      @focus="show = true" @blur="onBlur"><slot></slot></search-field>
+<dropdown class="typeahead" v-bind="{ items, show, component, itemKey: suggestionValue }" @select="onItemSelected">
+  <search-field v-bind="{ value, placeholder, suggestion }"
+                @input="val => $emit('input', val)"
+                @focus="show = true" @blur="onBlur">
+    <slot></slot>
+  </search-field>
 
-      <div slot="empty" class="px-3 text-muted">No results :(</div>
-  </dropdown>
+  <div slot="empty" class="px-3 text-muted">No results :(</div>
+</dropdown>
 </template>
 
 <script>
@@ -62,7 +64,7 @@ export default {
         fields: [key],
         sort: [key],
         limit: 25,
-        empty_sort: [{ field: key, direction: 'asc' }]
+        empty_sort: [{ field: key, direction: 'asc' }]  // eslint-disable-line camelcase
       }
 
       if (isArray(search)) {
@@ -85,7 +87,7 @@ export default {
 
       const results = indexed.search(value, config)
 
-      return results.items.map(({id}) => this.suggestions[id]).filter(this.filter)
+      return results.items.map(({ id }) => this.suggestions[id]).filter(this.filter)
     },
 
     suggestion () {
@@ -115,23 +117,24 @@ export default {
 
   components: { Dropdown, SearchField }
 }
+
 </script>
 
-<style lang="css">
+<style lang="scss" module>
 .typeahead {
   position: relative;
-}
 
-.typeahead.show .form-control {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
+  .dropdown-menu {
+    right: 0;
+    border-top: 0;
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 
-.typeahead .dropdown-menu {
-  right: 0;
-  border-top: 0;
-  margin-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  &.show .form-control {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 </style>

@@ -2,27 +2,21 @@ import { isArray } from '../utils'
 
 export class ErrorBag {
   constructor (errors) {
-    Object.keys(errors).forEach((key) => {
-      this.set(key, errors[key])
-    })
+    this.errors = typeof (errors) === 'object' ? errors : {}
   }
 
   has (key) {
-    return this.hasOwnProperty(key)
+    return this.errors.hasOwnProperty(key)
   }
 
   get (key) {
-    const value = this[key]
+    const value = this.errors[key]
 
     if (isArray(value)) {
       return value.join(' ')
     }
 
     return value
-  }
-
-  set (key, value) {
-    this[key] = value
   }
 }
 

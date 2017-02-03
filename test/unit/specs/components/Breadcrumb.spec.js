@@ -9,9 +9,9 @@ function getComponent (ctx, template) {
     computed: {
       crumbs () {
         return [
-          {link: '/', title: 'Home'},
-          {link: '/users', title: 'Users'},
-          {link: '/users/me', title: 'Me'}
+          { link: '/', title: 'Home' },
+          { link: '/users', title: 'Users' },
+          { link: '/users/me', title: 'Me' }
         ]
       },
       links () {
@@ -25,12 +25,12 @@ describe('Breadcrumb.vue', function () {
   it('should render correctly', function () {
     const vm = getComponent(this, `<breadcrumb :links="crumbs" component="a"/>`)
 
-    vm.$('nav.breadcrumb').should.exist
+    vm.$el.should.exist
   })
 
   it('should render correctly', function () {
     const vm = getComponent(this, `<breadcrumb :links="links" component="a"/>`)
 
-    vm.$('nav.breadcrumb').should.exist
+    vm.$el.should.exist
   })
 })

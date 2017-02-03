@@ -1,5 +1,5 @@
 <template>
-  <i class="fa" :class="[`fa-${type}`]"></i>
+  <i class="fa" :class="[typeName]" />
 </template>
 
 <script>
@@ -10,6 +10,12 @@ export default {
     type: {
       required: true,
       type: String
+    }
+  },
+
+  computed: {
+    typeName () {
+      return `fa-${this.type}`
     }
   }
 }

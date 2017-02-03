@@ -9,8 +9,8 @@ function getComponent (ctx, template) {
       return {
         search: '',
         suggestions: [
-          {id: 1, name: 'Rahul Kadyan'},
-          {id: 2, name: 'Foo Bar'}
+          { id: 1, name: 'Rahul Kadyan' },
+          { id: 2, name: 'Foo Bar' }
         ]
       }
     }

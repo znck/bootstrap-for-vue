@@ -18,8 +18,8 @@ export default {
 }
 </script>
 
-<style>
-  legend.wrapper-legend {
-    font-size: inherit;
-  }
+<style lang="scss" module>
+.wrapper-legend {
+  font-size: inherit;
+}
 </style>

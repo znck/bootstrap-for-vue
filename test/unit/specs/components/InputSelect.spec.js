@@ -13,7 +13,7 @@ function getComponent (ctx, template, value = 1) {
           { id: 3, name: 'three' },
           { id: 4, name: 'four' }
         ],
-        errors: makeErrors({value: 'This field is required.'})
+        errors: makeErrors({ value: 'This field is required.' })
       }
     },
     components: { InputSelect }
@@ -24,7 +24,7 @@ describe('InputSelect.vue', function () {
   it('should render correct contents', function () {
     const vm = getComponent(this, '<input-select v-model="value" :options="options" />')
 
-    const group = vm.$('.form-group')
+    const group = vm.$el
     const input = vm.$('select')
 
     group.should.exist
@@ -34,7 +34,6 @@ describe('InputSelect.vue', function () {
       .and.have.class('form-control')
       .and.have.class('custom-select')
   })
-
 
   it('should have label', function () {
     const vm = getComponent(this, '<input-select v-model="value" :options="options" title="Select a number" />')
@@ -47,7 +46,6 @@ describe('InputSelect.vue', function () {
       .and.have.attr('for', id)
   })
 
-
   it('should have helper text', function () {
     const vm = getComponent(this, '<input-select v-model="value" :options="options" title="Select a number" subtitle="Eg. 1, 2, 3, 4" />')
 
@@ -58,7 +56,6 @@ describe('InputSelect.vue', function () {
       .and.have.class('text-muted')
       .and.have.text('Eg. 1, 2, 3, 4')
   })
-
 
   it('should have required and autofocus attributes & placeholder', function () {
     const vm = getComponent(this, '<input-select v-model="value" :options="options" title="Select a number" subtitle="Eg. 1, 2, 3, 4" required autofocus placeholder="Number"/>', '')
@@ -74,13 +71,12 @@ describe('InputSelect.vue', function () {
     })
   })
 
-
   it('should provide feedback on error', function () {
     const vm = getComponent(this, `<input-select v-model="value"
       :options="options" title="Select a number" subtitle="Eg. 1, 2, 3, 4" :errors="errors" />`)
 
     return vm.tick().then(function () {
-      const group = vm.$('.form-group')
+      const group = vm.$el
       const feedback = vm.$('.form-control-feedback')
 
       group.should.have.class('has-danger')

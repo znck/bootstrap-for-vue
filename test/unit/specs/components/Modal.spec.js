@@ -4,7 +4,7 @@ import Modal from 'src/components/Modal'
 function getComponent (ctx, template, data) {
   return render(ctx, {
     template,
-    components: {Modal},
+    components: { Modal },
     data () {
       return data || { open: false, title: 'A Modal' }
     }
@@ -18,7 +18,6 @@ describe('Modal.js', function () {
       '<div><button @click="open = !open">Toggle</button> <modal v-bind="{ open, title }" @close="open = false">This is a modal.</modal></div>'
     )
   })
-
 
   it('should render small modal correctly', function () {
     const vm = getComponent(

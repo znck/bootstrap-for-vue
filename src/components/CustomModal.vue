@@ -1,16 +1,16 @@
 <template>
-<div class="custom-modal" v-if="showing">
+<div class="custom-modal" v-if="showing" tabindex="1" @keydown.esc.stop="$emit('close')">
   <div class="backdrop"></div>
 
   <div class="wrapper" :class="[wrapper]" ref="wrapper" @click.stop="onWrapper">
     <slot></slot>
   </div>
 
-  <a v-if="dismissable" role="button" class="dissmiss" @click.prevent="$emit('close')">&times;</a>
+  <a v-if="dismissable" role="button" class="dismiss" @click.prevent="$emit('close')">&times;</a>
 </div>
 </template>
 
-<script>
+<script lang="babel">
 export default {
   name: 'Modal',
 
@@ -19,7 +19,7 @@ export default {
       default: null,
       type: Boolean
     },
-    dissmissOnBackdrop: {
+    dismissOnBackdrop: {
       default: true,
       type: Boolean
     },
@@ -63,7 +63,7 @@ export default {
     onWrapper (event) {
       if (!this.dismissable) return
 
-      if (this.dissmissOnBackdrop && this.$refs.wrapper === event.target) {
+      if (this.dismissOnBackdrop && this.$refs.wrapper === event.target) {
         this.$emit('close')
       }
     }
@@ -81,7 +81,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" module>
 .custom-modal {
   position: fixed;
   top: 0;
@@ -91,81 +91,77 @@ export default {
   z-index: 1050;
 }
 
-.custom-modal .backdrop {
+.backdrop {
   background-color: rgba(0, 0, 0, .85);
-}
 
-.custom-modal .backdrop.inverse {
-    background-color: white;
-}
-
-.custom-modal .backdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: -1;
+
+  .dismiss {
+    margin: 1rem;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    font-size: 1.25rem;
+
+    border-radius: 100%;
+    cursor: pointer;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9999999;
+    transition: all .3s;
+
+    color: white !important;
+
+    &:hover {
+      color: #333 !important;
+      background: white;
+    }
+  }
+
+  &.inverse {
+    background-color: white;
+
+    .dismiss {
+      color: #ccc !important;
+      &:hover {
+        color: white !important;
+        background: #333;
+      }
+
+    }
+  }
 }
 
-.custom-modal .wrapper {
+.wrapper {
   position: relative;
   height: 100%;
   overflow: auto;
   z-index: 1;
 }
 
-.custom-modal .dissmiss {
-  margin: 1rem;
-  width: 28px;
-  height: 28px;
-  text-align: center;
-  font-size: 1.25rem;
-
-  border-radius: 100%;
-  cursor: pointer;
-
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9999999;
-  transition: all .3s;
-}
-
-.custom-modal .dissmiss {
-  color: white !important;
-}
-
-.custom-modal .dissmiss:hover {
-  color: #333 !important;
-  background: white;
-}
-
-.custom-modal .backdrop.inverse .dissmiss {
-    color: #ccc !important;
-}
-.custom-modal .backdrop.inverse .dissmiss:hover {
-  color: white !important;
-  background: #333;
-}
-
-
-.custom-modal .wrapper-default {
+.wrapper-default {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-}
 
-.custom-modal .wrapper-default:before, .custom-modal .wrapper-default:after {
-  content: '';
-  display: block;
-  flex: 1;
-}
+  > * {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 600px;
+  }
 
-.custom-modal .wrapper-default > * {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  max-width: 600px;
+  &:before, &:after {
+    content: '';
+    display: block;
+    flex: 1;
+  }
 }
 </style>

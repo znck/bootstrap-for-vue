@@ -4,7 +4,7 @@ import Alert from 'src/components/Alert.vue'
 function getComponent (ctx, template) {
   return render(ctx, {
     template,
-    components: {Alert}
+    components: { Alert }
   })
 }
 
@@ -15,10 +15,9 @@ describe('Alert.vue', function () {
       '<alert>This is an alert.</alert>'
     )
 
-    vm.$('[role=alert]').should.exist
+    vm.$el.should.exist
       .and.have.text('×This is an alert.')
   })
-
 
   it('should render error', function () {
     const vm = getComponent(
@@ -26,10 +25,9 @@ describe('Alert.vue', function () {
       '<alert type="danger">This is an alert.</alert>'
     )
 
-    vm.$('[role=alert]').should.exist
+    vm.$el.should.exist
       .and.have.text('×This is an alert.')
   })
-
 
   it('should render warning', function () {
     const vm = getComponent(
@@ -37,10 +35,9 @@ describe('Alert.vue', function () {
       '<alert type="warning">This is an alert.</alert>'
     )
 
-    vm.$('[role=alert]').should.exist
+    vm.$el.should.exist
       .and.have.text('×This is an alert.')
   })
-
 
   it('should render info', function () {
     const vm = getComponent(
@@ -48,7 +45,7 @@ describe('Alert.vue', function () {
       '<alert type="info">This is an alert.</alert>'
     )
 
-    vm.$('[role=alert]').should.exist
+    vm.$el.should.exist
       .and.have.text('×This is an alert.')
   })
 
@@ -58,7 +55,7 @@ describe('Alert.vue', function () {
       '<alert message="This is an alert."/>'
     )
 
-    vm.$('[role=alert]').should.exist
+    vm.$el.should.exist
       .and.have.text('×This is an alert.')
   })
 
@@ -68,7 +65,7 @@ describe('Alert.vue', function () {
       '<alert :dismissable="false" message="This is an alert."/>'
     )
 
-    vm.$('[role=alert]').should.exist
+    vm.$el.should.exist
       .and.have.text('This is an alert.')
   })
 
@@ -78,6 +75,6 @@ describe('Alert.vue', function () {
       '<alert><h1>Alert</h1> <p>This is an alert.</p></alert>'
     )
 
-    vm.$('[role=alert]').should.exist
+    vm.$el.should.exist
   })
 })

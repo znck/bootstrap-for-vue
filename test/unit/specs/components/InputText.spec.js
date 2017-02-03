@@ -1,20 +1,21 @@
 import { render, makeErrors } from '../../util'
 import InputText from 'src/components/InputText.vue'
 
-function getComponent (ctx, props, attrs) {
-  props = props || { value: '' }
-  attrs = attrs || {}
+function getComponent (ctx, template, data = {}) {
+  if (!('value' in data)) data.value = ''
 
-  if (!('value' in props)) props.value = '' // Value is a required field.
-
-  return render(ctx, InputText, { props, attrs })
+  return render(ctx, {
+    template,
+    data () { return data },
+    components: { InputText }
+  })
 }
 
 describe('InputText.vue', function () {
   it('should render correct contents', function () {
-    const vm = getComponent(this)
+    const vm = getComponent(this, `<input-text v-model="value" />`)
 
-    const group = vm.$('.form-group')
+    const group = vm.$el
     const input = vm.$('input')
 
     group.should.exist
@@ -26,9 +27,8 @@ describe('InputText.vue', function () {
       .and.have.attr('type', 'text')
   })
 
-
   it('should have label', function (done) {
-    const vm = getComponent(this, { title: 'Name Field' })
+    const vm = getComponent(this, `<input-text v-model="value" title="Name Field" />`)
 
     const label = vm.$('label')
     const id = vm.$('input').getAttribute('id')
@@ -44,9 +44,8 @@ describe('InputText.vue', function () {
     })
   })
 
-
   it('should have helper text', function (done) {
-    const vm = getComponent(this, { subtitle: 'Your name here.' })
+    const vm = getComponent(this, `<input-text v-model="value" subtitle='Your name here.' />`)
 
     const helper = vm.$('small')
 
@@ -61,35 +60,30 @@ describe('InputText.vue', function () {
     })
   })
 
+  it('should provide feedback on error', function () {
+    const vm = getComponent(this, `<input-text v-model="value" name="name" :errors="errors" />`, { name: 'name', errors: makeErrors({ name: 'Name is required.' }) })
 
-  it('should provide feedback on error', function (done) {
-    const vm = getComponent(this, { name: 'name', errors: makeErrors({ name: 'Name is required.' }) })
-
-    const group = vm.$('.form-group')
+    const group = vm.$el
     const feedback = vm.$('.form-control-feedback')
 
-    vm.tick().then(function () {
+    return vm.tick().then(function () {
       group.should.have.class('has-danger')
 
       feedback.should.exist
         .and.have.text('Name is required.')
-
-      done()
     })
   })
 
-
-  it('should have required, autofocus and placeholder attributes', function (done) {
-    const vm = getComponent(this, {}, { required: true, autofocus: true, placeholder: 'Name' })
+  it('should have required, autofocus and placeholder attributes', function () {
+    const vm = getComponent(this, `<input-text v-model="value" required autofocus placeholder="Name" />`)
 
     const input = vm.$('input')
 
-    vm.tick().then(function () {
-      input.should.have.attr('autofocus', 'autofocus')
-      input.should.have.attr('required', 'required')
-      input.should.have.attr('placeholder', 'Name')
+    input.should.have.attr('autofocus', 'autofocus')
+    input.should.have.attr('placeholder', 'Name')
 
-      done()
+    return vm.tick().then(function () {
+      input.should.have.attr('required', 'required')
     })
   })
 })

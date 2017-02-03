@@ -2,7 +2,7 @@ import getExpression from './getExpression'
 
 export default {
   props: {
-    value: { type: [Number, String], required: true },
+    value: { required: true },
     title: { type: String, default: null },
     subtitle: { type: String, default: null },
     name: { type: String, default: null },
@@ -11,27 +11,49 @@ export default {
         return typeof (errors) === 'object' && typeof (errors.has) === 'function'
       },
       default: null
-    }
+    },
+    placeholder: String,
+    autofill: [String, Boolean],
+    autofocus: [String, Boolean]
   },
+
   data () {
     return {
       expression: null,
-      autofocus: null,
-      required: null,
-      placeholder: null,
-      autofill: null
+      required: null
     }
   },
+
   computed: {
+    /**
+     * Unique ID.
+     *
+     * @property id
+     * @return {string}
+     */
     id () {
       return `text${this._uid}`
     },
+
+    /**
+     * Input field name.
+     *
+     * @property nameKey
+     * @type {string}
+     */
     nameKey () {
       const name = this.name
       const expression = this.expression
 
       return name || expression
     },
+
+    /**
+     * Get error or feedback for the input field.
+     *
+     * @property feedback
+     * @type {string|null}
+     */
     feedback () {
       const errors = this.errors
       const name = this.nameKey
@@ -40,18 +62,20 @@ export default {
         return errors.get(name)
       }
 
-      return undefined
+      return null
     }
   },
 
   methods: {
+    /**
+     * Mirror attributes from root element.
+     *
+     * @return {void}
+     */
     updateAttributes () {
       if (!this.$vnode || !this.$vnode.data || !this.$vnode.data.attrs) return
 
-      this.autofocus = this.$vnode.data.attrs.hasOwnProperty('autofocus')
       this.required = this.$vnode.data.attrs.hasOwnProperty('required')
-      this.placeholder = this.$vnode.data.attrs.placeholder
-      this.autofill = this.$vnode.data.attrs.autofill
     }
   },
 
@@ -70,5 +94,4 @@ export default {
   },
 
   mixins: [getExpression]
-
 }

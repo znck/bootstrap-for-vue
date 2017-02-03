@@ -1,22 +1,20 @@
-const $ = window.jQuery
-
 export default {
   bind (el, binding) {
-    const tooltip = $(el).tooltip({
+    el.setAttribute('data-title', binding.value)
+
+    window.jQuery(el).tooltip({
       html: binding.modifiers.html || false,
       placement: binding.arg || 'bottom'
     })
-
-    el.setAttribute('data-title', binding.value)
   },
 
   update (el, binding) {
     if (binding.value !== binding.oldValue) {
-      el.setAttribute('data-title', binding.value)
+      el.setAttribute('data-original-title', binding.value)
     }
   },
 
   unbind (el) {
-    $(el).tooltip('dispose')
+    window.jQuery(el).tooltip('dispose')
   }
 }
