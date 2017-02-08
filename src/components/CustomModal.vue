@@ -101,30 +101,6 @@ export default {
   bottom: 0;
   z-index: -1;
 
-  .dismiss {
-    margin: 1rem;
-    width: 28px;
-    height: 28px;
-    text-align: center;
-    font-size: 1.25rem;
-
-    border-radius: 100%;
-    cursor: pointer;
-
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 9999999;
-    transition: all .3s;
-
-    color: white !important;
-
-    &:hover {
-      color: #333 !important;
-      background: white;
-    }
-  }
-
   &.inverse {
     background-color: white;
 
@@ -136,6 +112,30 @@ export default {
       }
 
     }
+  }
+}
+
+.dismiss {
+  margin: 1rem;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  font-size: 1.25rem;
+
+  border-radius: 100%;
+  cursor: pointer;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999999;
+  transition: all .3s;
+
+  color: white !important;
+
+  &:hover {
+    color: #333 !important;
+    background: white;
   }
 }
 

@@ -3,8 +3,11 @@
       <label v-if="title" :for="id" class="form-control-label">
         <slot>{{ title }}</slot>
       </label>
-      <typeahead-field :id="id" v-model="query" @select="onSelect" @blur="onBlur"
-             v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component }">
+      <typeahead-field :id="id" v-model="selected"
+                       @select="onInput"
+                       @search="any => $emit('search', any)"
+                       @blur="any => $emit('blur', any)"
+                       v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component, showEmpty }">
          <input type="text" class="input-search-placeholder-proxy" :value="placeholder" readonly>
       </typeahead-field>
       <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
@@ -14,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script lang="babel">
 import inputHelper from '../mixins/inputHelper'
 import TypeaheadField from './Typeahead.vue'
 import { mapObject } from '../utils'
@@ -29,50 +32,37 @@ export default {
     },
 
     ...mapObject(TypeaheadField.props, [
-      'suggestions', 'suggestionValue', 'search', 'filter', 'component'
+      'suggestions', 'suggestionValue', 'search', 'filter', 'component', 'showEmpty'
     ])
   },
 
-  data () {
-    return {
-      query: ''
-    }
+  computed: {
+    selected () {
+      const items = this.suggestions
+      const key = this.suggestionKey
+      const value = this.value instanceof Array ? this.value : [this.value]
+
+      return items.filter(item => value.indexOf(item[key]) > -1)
+    },
   },
 
   methods: {
-    onBlur () {
-      if (this.query === '') {
-        this.$emit('input', '')
-      } else {
-        const current = this.findItemByValue(this.query)
-        const item = this.findItem(this.value)
+    onInput (item) {
+      const id = item[this.suggestionKey]
 
-        if (current) {
-          this.$emit('input', current[this.suggestionKey])
-        } else if (item) {
-          this.query = item[this.suggestionValue]
+      if (this.value instanceof Array) {
+        const index = this.value.indexOf(id)
+        const value = this.value.slice()
+
+        if (index > -1) {
+          value.splice(index, 1)
         } else {
-          this.query = ''
+          value.push(id)
         }
-      }
-    },
-    onSelect (item) {
-      this.$emit('input', item[this.suggestionKey])
-    },
-    findItem (value) {
-      return this.suggestions.find(suggestion => suggestion[this.suggestionKey] === value)
-    },
-    findItemByValue (value) {
-      return this.suggestions.find(suggestion => suggestion[this.suggestionValue] === value)
-    }
-  },
 
-  watch: {
-    value (value) {
-      const item = this.findItem(value)
-
-      if (item) {
-        this.query = item[this.suggestionValue]
+        this.$emit('input', value)
+      } else {
+        this.$emit('input', id)
       }
     }
   },

@@ -8,6 +8,7 @@ import InputButton from './components/InputButton.vue'
 import InputSearch from './components/InputSearch.vue'
 import InputSelect from './components/InputSelect.vue'
 import InputText from './components/InputText.vue'
+import InputTextarea from './components/InputTextarea.vue'
 import InputTypeahead from './components/InputTypeahead.vue'
 import Modal from './components/Modal'
 import Search from './components/Search.vue'
@@ -28,6 +29,7 @@ export const INPUT = {
   InputSearch,
   InputSelect, // Select
   InputText, // Text, Number etc.
+  InputTextarea,
   InputTypeahead
 }
 

@@ -42,7 +42,7 @@ rollup({
         const result = styles.map(style => {
           const filename = style.id.replace(dirs.src, '').replace(/\.vue$/i, '.scss').replace(/^\//, '')
 
-          combine += '@import ' + JSON.stringify(`./${filename}`) + '\n'
+          combine += '@import ' + JSON.stringify(filename.replace(/\.scss$/i, '')) + ';\n'
 
           write(path.resolve(dirs.scss, filename), style.code.trim())
 

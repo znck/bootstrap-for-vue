@@ -7,7 +7,7 @@ function getComponent (ctx, template) {
     components: { Typeahead },
     data () {
       return {
-        search: '',
+        search: [],
         suggestions: [
           { id: 1, name: 'Rahul Kadyan' },
           { id: 2, name: 'Foo Bar' }

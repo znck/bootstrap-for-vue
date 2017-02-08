@@ -1,16 +1,19 @@
 <template>
-<dropdown class="typeahead" v-bind="{ items, show, component, itemKey: suggestionValue }" @select="onItemSelected">
-  <search-field v-bind="{ value, placeholder, suggestion }"
-                @input="val => $emit('input', val)"
+<dropdown class="bootstrap-for-vue-typeahead" v-bind="{ items, show, component, itemKey: suggestionValue, active: index, selected: value }" @select="onItemSelected">
+  <search-field v-bind="{ placeholder, suggestion }" v-model="query"
+                @input="val => $emit('search', val)"
+                @keydown.down="onDown" @keydown.up="onUp"
+                @keydown.enter.prevent="onEnter"
+                @keydown.tab="onTab"
                 @focus="show = true" @blur="onBlur">
     <slot></slot>
   </search-field>
 
-  <div slot="empty" class="px-3 text-muted">No results :(</div>
+  <div slot="empty" class="px-3 text-muted" v-if="showEmpty">No results :(</div>
 </dropdown>
 </template>
 
-<script>
+<script lang="babel">
 import Sifter from 'sifter'
 import debounce from 'lodash.debounce'
 import SearchField from './Search.vue'
@@ -19,6 +22,11 @@ import { mapObject, isArray, isObject } from '../utils'
 
 export default {
   props: {
+    value: {
+      type: [Array, String, Number],
+      required: true
+    },
+
     suggestions: {
       type: Array,
       required: true
@@ -42,16 +50,40 @@ export default {
       type: String
     },
 
-    ...mapObject(SearchField.props, ['value', 'placeholder'])
+    showEmpty: {
+      type: Boolean,
+      default: true
+    },
+
+    ...mapObject(SearchField.props, ['placeholder'])
   },
 
   data () {
     return {
-      show: false
+      show: false,
+      q: '',
+      index: -1
     }
   },
 
   computed: {
+    query: {
+      get () {
+        const show = this.show
+        const value = this.value instanceof Array ? this.value : [this.value]
+        const suggestionValue = this.suggestionValue
+        const q = this.q
+
+        if (show) return q
+
+        return value.map(v => v[suggestionValue]).join(', ')
+      },
+
+      set (val) {
+        this.q = val
+      }
+    },
+
     indexed () {
       return new Sifter(this.suggestions)
     },
@@ -83,21 +115,30 @@ export default {
     items () {
       const indexed = this.indexed
       const config = this.config
-      const value = this.value
+      const value = this.q
 
       const results = indexed.search(value, config)
 
       return results.items.map(({ id }) => this.suggestions[id]).filter(this.filter)
     },
 
-    suggestion () {
+    suggestionItem () {
       const suggestions = this.items
-      const value = this.value
+      const value = this.q
       const key = this.suggestionValue
 
       const suggestion = suggestions.find(suggestion => typeof (suggestion[key]) === 'string' && suggestion[key].startsWith(value))
 
-      if (suggestion) return suggestion[key]
+      if (suggestion) return suggestion
+
+      return null
+    },
+
+    suggestion () {
+      const item = this.suggestionItem
+      const key = this.suggestionValue
+
+      if (item) return item[key]
 
       return ''
     }
@@ -108,11 +149,50 @@ export default {
       this.$emit('select', item)
     },
 
+    onDown () {
+      if (this.index + 1 < this.items.length) {
+        this.index += 1
+      } else {
+        this.index = 0
+      }
+    },
+
+    onUp () {
+      if (this.index > 0) this.index -= 1
+      else this.index = this.items.length - 1
+    },
+
+    onEnter () {
+      if (this.index > -1) {
+        this.$emit('select', this.items[this.index])
+        this.blur()
+      } else if (this.suggestionItem) {
+        this.$emit('select', this.suggestionItem)
+        this.blur()
+      }
+    },
+
+    onTab (e) {
+      if (e.shiftKey || e.altKey) return
+
+      if (this.q.length && this.q !== this.suggestion) {
+        this.q = this.suggestion
+
+        e.preventDefault()
+      }
+    },
+
     onBlur: debounce(function onBlur () {
       this.show = false
+      this.index = -1
+      this.q = ''
 
       this.$emit('blur')
-    }, 100)
+    }, 200),
+
+    blur () {
+      this.$el.querySelector('input[type=search]').blur()
+    }
   },
 
   components: { Dropdown, SearchField }
@@ -120,8 +200,8 @@ export default {
 
 </script>
 
-<style lang="scss" module>
-.typeahead {
+<style lang="scss">
+.bootstrap-for-vue-typeahead {
   position: relative;
 
   .dropdown-menu {

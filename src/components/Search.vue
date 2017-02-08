@@ -1,19 +1,19 @@
 <template>
 <div class="form-control input-search">
   <div class="input-search-placeholder">
-    <span v-if="isEmpty"><slot><icon type="search" class="mr-1"></icon><input type="text"
-                                                                              class="input-search-placeholder-proxy"
-                                                                              :value="placeholder"
-                                                                              readonly></slot></span>
+    <span v-if="isEmpty"><slot><icon type="search" class="mr-1"
+      ></icon><input type="text" class="input-search-placeholder-proxy" :value="placeholder" readonly tabindex="-1"></slot></span>
   </div>
   <input type="text" class="input-search-suggestion" :value="suggestion" readonly
-         v-if="!isEmpty && hasSuggestion && show">
+         v-if="!isEmpty && hasSuggestion && show" tabindex="-1">
   <input type="search" class="input-search-field" :value="value"
+         @keydown="e => $emit('keydown', e)" @keyup="e => $emit('keyup', e)"
+         @keypress="e => $emit('keypress', e)"
          @input="$emit('input', $event.target.value)" @focus="onFocus" @blur="onBlur">
 </div>
 </template>
 
-<script>
+<script lang="babel">
 import Icon from './Icon.vue'
 
 export default {
@@ -39,7 +39,7 @@ export default {
 
   computed: {
     /**
-     * Whether suggesion is available or not?
+     * Whether suggestion is available or not?
      *
      * @type {Boolean}
      */
@@ -100,7 +100,7 @@ export default {
 }
 
 .input-search-suggestion, .input-search-field, .input-search-placeholder-proxy {
-  border: none;
+  border: transparent;
   background: transparent;
   box-shadow: none;
   outline: none;

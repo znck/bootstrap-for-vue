@@ -14,6 +14,7 @@ export default {
     },
     placeholder: String,
     autofill: [String, Boolean],
+    autocomplete: [String, Boolean],
     autofocus: [String, Boolean]
   },
 
