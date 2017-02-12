@@ -4,9 +4,9 @@
 
   <div class="dropdown-menu" v-if="items.length">
     <slot name="items">
-      <div v-for="(item, index) in items" class="dropdown-item"
+      <div v-for="(item, index) in items" class="dropdown-item" :class="{ active: active === index }"
            v-bind="{ active: active === index, selected: selected.indexOf(item) > -1, item}"
-           @click.native.prevent="$emit('select', item)" :is="component" :key="item">{{ item[itemKey] }}
+           @click.native.prevent="$emit('select', item)" @click.prevent="$emit('select', item)" :is="component" :key="item">{{ item[itemKey] }}
       </div>
     </slot>
   </div>
@@ -60,6 +60,10 @@ export default {
 .dropdown-menu {
   a.dropdown-item {
     cursor: pointer;
+
+    &[selected] {
+      font-weight: bolder;
+    }
   }
 }
 </style>

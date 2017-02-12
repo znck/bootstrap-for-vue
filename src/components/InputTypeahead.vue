@@ -6,8 +6,9 @@
       <typeahead-field :id="id" v-model="selected"
                        @select="onInput"
                        @search="any => $emit('search', any)"
+                       @enter="any => $emit('enter', any)"
                        @blur="any => $emit('blur', any)"
-                       v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component, showEmpty }">
+                       v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component, showEmpty, inputClass }">
          <input type="text" class="input-search-placeholder-proxy" :value="placeholder" readonly>
       </typeahead-field>
       <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>

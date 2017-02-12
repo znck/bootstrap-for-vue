@@ -2,7 +2,7 @@
 <div class="custom-modal" v-if="showing" tabindex="1" @keydown.esc.stop="$emit('close')">
   <div class="backdrop"></div>
 
-  <div class="wrapper" :class="[wrapper]" ref="wrapper" @click.stop="onWrapper">
+  <div class="wrapper" :class="[wrapper || $style.wrapperDefault ]" ref="wrapper" @click.stop="onWrapper">
     <slot></slot>
   </div>
 
@@ -24,8 +24,7 @@ export default {
       type: Boolean
     },
     wrapper: {
-      type: String,
-      default: 'wrapper-default'
+      type: String
     },
     dismissable: {
       type: Boolean,
@@ -38,6 +37,10 @@ export default {
   },
 
   computed: {
+    $style () {
+      return this.$options.cssModules
+    },
+
     showing () {
       const open = this.open
       const state = this.state

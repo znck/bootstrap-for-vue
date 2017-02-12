@@ -1,8 +1,10 @@
 <template>
 <div class="form-control input-search">
-  <div class="input-search-placeholder">
-    <span v-if="isEmpty"><slot><icon type="search" class="mr-1"
-      ></icon><input type="text" class="input-search-placeholder-proxy" :value="placeholder" readonly tabindex="-1"></slot></span>
+  <div class="input-search-placeholder" v-if="isEmpty">
+    <slot>
+      <icon type="search" class="mr-1"></icon>
+      <input type="text" class="input-search-proxy" :value="placeholder" readonly tabindex="-1" />
+    </slot>
   </div>
   <input type="text" class="input-search-suggestion" :value="suggestion" readonly
          v-if="!isEmpty && hasSuggestion && show" tabindex="-1">
@@ -99,7 +101,7 @@ export default {
   width: 100%;
 }
 
-.input-search-suggestion, .input-search-field, .input-search-placeholder-proxy {
+.input-search-suggestion, .input-search-field, .input-search-placeholder input {
   border: transparent;
   background: transparent;
   box-shadow: none;

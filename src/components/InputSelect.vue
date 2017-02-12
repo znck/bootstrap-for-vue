@@ -1,7 +1,7 @@
 <template>
   <div class="form-group" :class="{ 'has-danger': feedback }">
      <label v-if="title" :for="id" class="form-control-label">{{ title }}</label>
-     <select class="form-control custom-select"
+     <select class="form-control custom-select" :class="[inputClass]"
              @input="$emit('input', $event.target.value)"
              v-bind="{ id, value, required, autofocus, multiple }">
        <option v-if="placeholder" :selected="value === '' || value === null" disabled>{{ placeholder }}</option>

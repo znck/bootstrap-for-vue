@@ -1,6 +1,6 @@
 <template>
-<dropdown class="bootstrap-for-vue-typeahead" v-bind="{ items, show, component, itemKey: suggestionValue, active: index, selected: value }" @select="onItemSelected">
-  <search-field v-bind="{ placeholder, suggestion }" v-model="query"
+<dropdown class="bootstrap-for-vue-typeahead" v-bind="{ items, show, component, itemKey: suggestionValue, active: index, selected }" @select="onItemSelected">
+  <search-field v-bind="{ placeholder, suggestion }" v-model="query" :class="[inputClass]"
                 @input="val => $emit('search', val)"
                 @keydown.down="onDown" @keydown.up="onUp"
                 @keydown.enter.prevent="onEnter"
@@ -32,6 +32,8 @@ export default {
       required: true
     },
 
+    inputClass: String,
+
     suggestionValue: {
       type: String,
       default: 'name'
@@ -62,7 +64,8 @@ export default {
     return {
       show: false,
       q: '',
-      index: -1
+      index: -1,
+      skip: false
     }
   },
 
@@ -86,6 +89,14 @@ export default {
 
     indexed () {
       return new Sifter(this.suggestions)
+    },
+
+    selected () {
+      const value = this.value
+
+      if (value instanceof Array) return value
+
+      return [value]
     },
 
     config () {
@@ -146,6 +157,13 @@ export default {
 
   methods: {
     onItemSelected (item) {
+      this.$el.querySelector('input[type=search]').focus()
+
+      this.$nextTick(() => {
+        console.log('BLUR IT')
+        this.blur()
+      })
+
       this.$emit('select', item)
     },
 
@@ -169,6 +187,8 @@ export default {
       } else if (this.suggestionItem) {
         this.$emit('select', this.suggestionItem)
         this.blur()
+      } else {
+        this.$emit('enter')
       }
     },
 
@@ -180,6 +200,10 @@ export default {
 
         e.preventDefault()
       }
+
+      if (this.items.length >= 1 && this.q.length && this.q === this.suggestion) {
+        this.$emit('select', this.items[0])
+      }
     },
 
     onBlur: debounce(function onBlur () {
@@ -188,7 +212,7 @@ export default {
       this.q = ''
 
       this.$emit('blur')
-    }, 200),
+    }, 400),
 
     blur () {
       this.$el.querySelector('input[type=search]').blur()
@@ -201,6 +225,8 @@ export default {
 </script>
 
 <style lang="scss">
+$input-border-color: #777 !default;
+
 .bootstrap-for-vue-typeahead {
   position: relative;
 
@@ -210,6 +236,7 @@ export default {
     margin-top: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    border-color: $input-border-color;
   }
 
   &.show .form-control {

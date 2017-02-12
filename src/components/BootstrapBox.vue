@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang="scss" module>
+<style lang="scss">
 span.custom-control-indicator {
   top: 0.2rem;
 }

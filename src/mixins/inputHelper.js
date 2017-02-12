@@ -12,6 +12,7 @@ export default {
       },
       default: null
     },
+    inputClass: String,
     placeholder: String,
     autofill: [String, Boolean],
     autocomplete: [String, Boolean],

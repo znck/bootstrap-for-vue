@@ -3,7 +3,7 @@
       <label v-if="title" :for="id" class="form-control-label">
         <slot>{{ title }}</slot>
       </label>
-      <input :id="id" class="form-control"
+      <input :id="id" class="form-control" :class="[inputClass]"
              @input="$emit('input', $event.target.value)"
              v-bind="{ type, value, required, autofocus, placeholder, autocomplete }">
       <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
