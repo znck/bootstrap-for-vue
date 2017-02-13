@@ -2,7 +2,7 @@
 <div class="form-control input-search">
   <div class="input-search-placeholder" v-if="isEmpty">
     <slot>
-      <icon type="search" class="mr-1"></icon>
+      <icon :type="icon" class="mr-1" v-if="icon"></icon>
       <input type="text" class="input-search-proxy" :value="placeholder" readonly tabindex="-1" />
     </slot>
   </div>
@@ -32,6 +32,10 @@ export default {
     value: {
       type: String,
       required: true
+    },
+    icon: {
+      type: [String, Boolean],
+      default: 'search'
     }
   },
 
@@ -74,6 +78,10 @@ export default {
 
       this.$emit('focus', event)
     }
+  },
+
+  created () {
+    this.$on('focus', () => this.onFocus())
   },
 
   components: { Icon }

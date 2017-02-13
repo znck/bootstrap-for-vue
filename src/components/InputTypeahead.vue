@@ -1,21 +1,20 @@
 <template>
-  <div class="form-group" :class="{ 'has-danger': feedback }">
-      <label v-if="title" :for="id" class="form-control-label">
-        <slot>{{ title }}</slot>
-      </label>
-      <typeahead-field :id="id" v-model="selected"
-                       @select="onInput"
-                       @search="any => $emit('search', any)"
-                       @enter="any => $emit('enter', any)"
-                       @blur="any => $emit('blur', any)"
-                       v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component, showEmpty, inputClass }">
-         <input type="text" class="input-search-placeholder-proxy" :value="placeholder" readonly>
-      </typeahead-field>
-      <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
-      <small v-if="subtitle" class="form-text text-muted">
-        <slot name="subtitle">{{ subtitle }}</slot>
-      </small>
-  </div>
+<div class="form-group" :class="{ 'has-danger': feedback }">
+  <label v-if="title" :for="id" class="form-control-label">
+    <slot>{{ title }}</slot>
+  </label>
+  <typeahead-field :id="id" v-model="selected" ref="ta"
+                   @select="onInput"
+                   @search="any => $emit('search', any)"
+                   @enter="any => $emit('enter', any)"
+                   @blur="any => $emit('blur', any)"
+                   v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component, showEmpty, inputClass, placeholder, icon: false }">
+  </typeahead-field>
+  <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
+  <small v-if="subtitle" class="form-text text-muted">
+    <slot name="subtitle">{{ subtitle }}</slot>
+  </small>
+</div>
 </template>
 
 <script lang="babel">
@@ -30,6 +29,11 @@ export default {
     suggestionKey: {
       type: String,
       default: 'id'
+    },
+
+    placeholder: {
+      type: String,
+      default: ''
     },
 
     ...mapObject(TypeaheadField.props, [
@@ -62,6 +66,7 @@ export default {
         }
 
         this.$emit('input', value)
+        this.$ta.$emit('keep-open')
       } else {
         this.$emit('input', id)
       }

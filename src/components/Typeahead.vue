@@ -1,11 +1,13 @@
 <template>
-<dropdown class="bootstrap-for-vue-typeahead" v-bind="{ items, show, component, itemKey: suggestionValue, active: index, selected }" @select="onItemSelected">
-  <search-field v-bind="{ placeholder, suggestion }" v-model="query" :class="[inputClass]"
+<dropdown class="bootstrap-for-vue-typeahead"
+          v-bind="{ items, show, component, itemKey: suggestionValue, active: index, selected }"
+          @select="onItemSelected">
+  <search-field v-bind="{ placeholder, suggestion, icon }" v-model="query" :class="[inputClass]"
                 @input="val => $emit('search', val)"
                 @keydown.down="onDown" @keydown.up="onUp"
                 @keydown.enter.prevent="onEnter"
                 @keydown.tab="onTab"
-                @focus="show = true" @blur="onBlur">
+                @focus="show = true" @blur="onBlur" ref="search">
     <slot></slot>
   </search-field>
 
@@ -57,7 +59,7 @@ export default {
       default: true
     },
 
-    ...mapObject(SearchField.props, ['placeholder'])
+    ...mapObject(SearchField.props, ['placeholder', 'icon'])
   },
 
   data () {
@@ -101,13 +103,12 @@ export default {
 
     config () {
       const search = this.search
-      const key = this.suggestionValue
+      const displayField = this.suggestionValue
 
       const config = {
-        fields: [key],
-        sort: [key],
-        limit: 25,
-        empty_sort: [{ field: key, direction: 'asc' }]  // eslint-disable-line camelcase
+        fields: [displayField],
+        sort: [{ field: displayField, direction: 'asc' }],
+        limit: 25
       }
 
       if (isArray(search)) {
@@ -173,11 +174,15 @@ export default {
       } else {
         this.index = 0
       }
+
+      this.scrollIntoView()
     },
 
     onUp () {
       if (this.index > 0) this.index -= 1
       else this.index = this.items.length - 1
+
+      this.scrollIntoView()
     },
 
     onEnter () {
@@ -206,7 +211,7 @@ export default {
       }
     },
 
-    onBlur: debounce(function onBlur () {
+    onBlur: debounce(function onBlur() {
       this.show = false
       this.index = -1
       this.q = ''
@@ -216,7 +221,25 @@ export default {
 
     blur () {
       this.$el.querySelector('input[type=search]').blur()
+    },
+
+    scrollIntoView () {
+      this.$nextTick(() => {
+        const el = this.$el.querySelector('.dropdown-menu .active')
+
+        if (!el) return
+
+        if (el.scrollIntoViewIfNeeded) {
+          el.scrollIntoViewIfNeeded()
+        } else if (el.scrollIntoView) {
+          el.scrollIntoView()
+        }
+      })
     }
+  },
+
+  created () {
+    this.$on('keep-open', () => this.$refs.search.$emit('focus'))
   },
 
   components: { Dropdown, SearchField }
