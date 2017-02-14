@@ -33,7 +33,8 @@
   "dependencies": {
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
-    "sifter": "^0.5.2"
+    "sifter": "^0.5.2",
+    "vue-clickaway": "^2.1.0"
   },
   "peerDependencies": {
     "vue": "^2.1.8"

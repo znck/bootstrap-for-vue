@@ -62,7 +62,7 @@ export default {
   max-height: 300px;
   overflow-y: auto;
 
-  a.dropdown-item {
+  .dropdown-item {
     cursor: pointer;
 
     &[selected] {

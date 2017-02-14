@@ -66,7 +66,7 @@ export default {
         }
 
         this.$emit('input', value)
-        this.$ta.$emit('keep-open')
+        this.$refs.ta.$emit('keep-open')
       } else {
         this.$emit('input', id)
       }

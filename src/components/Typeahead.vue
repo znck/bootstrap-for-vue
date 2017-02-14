@@ -1,5 +1,5 @@
 <template>
-<dropdown class="bootstrap-for-vue-typeahead"
+<dropdown class="bootstrap-for-vue-typeahead" v-on-click-away="close"
           v-bind="{ items, show, component, itemKey: suggestionValue, active: index, selected }"
           @select="onItemSelected">
   <search-field v-bind="{ placeholder, suggestion, icon }" v-model="query" :class="[inputClass]"
@@ -17,6 +17,7 @@
 
 <script lang="babel">
 import Sifter from 'sifter'
+import { directive as onClickAway } from 'vue-clickaway'
 import debounce from 'lodash.debounce'
 import SearchField from './Search.vue'
 import Dropdown from './Dropdown.vue'
@@ -212,15 +213,24 @@ export default {
     },
 
     onBlur: debounce(function onBlur() {
-      this.show = false
-      this.index = -1
-      this.q = ''
+      if (this.skip) {
+        this.skip = false
 
+        return
+      }
+
+      this.close()
       this.$emit('blur')
     }, 400),
 
     blur () {
       this.$el.querySelector('input[type=search]').blur()
+    },
+
+    close () {
+      this.show = false
+      this.index = -1
+      this.q = ''
     },
 
     scrollIntoView () {
@@ -239,10 +249,15 @@ export default {
   },
 
   created () {
-    this.$on('keep-open', () => this.$refs.search.$emit('focus'))
+    this.$on('keep-open', () => {
+      this.skip = true
+      this.$el.querySelector('input[type=search]').focus()
+    })
   },
 
-  components: { Dropdown, SearchField }
+  components: { Dropdown, SearchField },
+
+  directives: { onClickAway }
 }
 
 </script>

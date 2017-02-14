@@ -16,7 +16,9 @@ export default {
     placeholder: String,
     autofill: [String, Boolean],
     autocomplete: [String, Boolean],
-    autofocus: [String, Boolean]
+    autofocus: [String, Boolean],
+    min: {},
+    max: {},
   },
 
   data () {
@@ -87,8 +89,12 @@ export default {
     if (model) {
       this.expression = model.split('.').pop()
     }
-
     this.updateAttributes()
+
+
+    if (this.autocomplete) {
+      this.$nextTick(() => this.$el.querySelector('input').focus())
+    }
   },
 
   beforeUpdate () {

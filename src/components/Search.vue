@@ -80,10 +80,6 @@ export default {
     }
   },
 
-  created () {
-    this.$on('focus', () => this.onFocus())
-  },
-
   components: { Icon }
 }
 
