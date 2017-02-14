@@ -1,7 +1,7 @@
 <template>
 <div class="form-check checkbox" :class="{ 'has-danger': feedback, 'form-check-inline': inline }" :checked="state">
   <label class="indicator">
-    <input v-bind="{ type, required, name: nameKey }" class="custom-control-input" :checked="state" @change="onChange">
+    <input v-bind="{ type, required, name: nameKey, autofocus, autocomplete }" class="custom-control-input" :checked="state" @change="onChange">
     <span v-if="title">{{ title || ' ' }}</span>
   </label>
 </div>

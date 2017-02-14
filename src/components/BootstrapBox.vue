@@ -1,7 +1,7 @@
 <template>
   <div class="form-check" :class="{ 'has-danger': feedback, 'form-check-inline': inline }">
     <label class="custom-control" :class="[`custom-${type}`]">
-      <input v-bind="{ type, required, name: nameKey }" class="custom-control-input" :checked="state" @change="onChange" hidden>
+      <input v-bind="{ type, required, name: nameKey, autofocus, autocomplete }" class="custom-control-input" :checked="state" @change="onChange" hidden>
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description" v-if="title">{{ title }}</span>
     </label>

@@ -6,6 +6,7 @@ export default {
     title: { type: String, default: null },
     subtitle: { type: String, default: null },
     name: { type: String, default: null },
+    inputName: { type: String, default: null },
     errors: {
       validator (errors) {
         return typeof (errors) === 'object' && typeof (errors.has) === 'function'
@@ -16,7 +17,7 @@ export default {
     placeholder: String,
     autofill: [String, Boolean],
     autocomplete: [String, Boolean],
-    autofocus: [String, Boolean],
+    autofocus: [Boolean],
     min: {},
     max: {},
   },
@@ -46,10 +47,11 @@ export default {
      * @type {string}
      */
     nameKey () {
+      const inputName = this.inputName
       const name = this.name
       const expression = this.expression
 
-      return name || expression
+      return inputName || name || expression
     },
 
     /**
@@ -83,17 +85,21 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     const model = this.getExpression('model')
 
     if (model) {
       this.expression = model.split('.').pop()
     }
     this.updateAttributes()
+  },
 
-
-    if (this.autocomplete) {
-      this.$nextTick(() => this.$el.querySelector('input').focus())
+  mounted () {
+    if (this.autofocus !== false) {
+      this.$nextTick(() => {
+        const el = this.$el.querySelector('[autofocus]')
+        if (el) el.focus()
+      })
     }
   },
 

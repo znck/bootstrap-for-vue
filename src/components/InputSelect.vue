@@ -3,7 +3,7 @@
      <label v-if="title" :for="id" class="form-control-label">{{ title }}</label>
      <select class="form-control custom-select" :class="[inputClass]"
              @input="$emit('input', $event.target.value)"
-             v-bind="{ id, value, required, autofocus, multiple }">
+             v-bind="{ id, value, required, autofocus, multiple, name }">
        <option v-if="placeholder" :selected="value === '' || value === null" disabled>{{ placeholder }}</option>
        <option v-for="option in selectOptions" :value="getValue(option)"
                :disabled="getDisabled(option)">{{ getDisplay(option) }}</option>
@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script>
+<script lang="babel">
 import inputHelper from '../mixins/inputHelper'
 import { isArray, isObject } from '../utils'
 

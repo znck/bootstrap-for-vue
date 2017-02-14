@@ -8,7 +8,7 @@
                    @search="any => $emit('search', any)"
                    @enter="any => $emit('enter', any)"
                    @blur="any => $emit('blur', any)"
-                   v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component, showEmpty, inputClass, placeholder, icon: false }">
+                   v-bind="{ required, autofocus, suggestions, suggestionKey, search, filter, component, showEmpty, inputClass, placeholder, icon: false, name }">
   </typeahead-field>
   <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
   <small v-if="subtitle" class="form-text text-muted">

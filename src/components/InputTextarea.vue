@@ -5,7 +5,7 @@
       </label>
       <textarea :id="id" type="text" class="form-control" :class="[ resizeableClass, inputClass ]"
                 @input="$emit('input', $event.target.value)"
-                v-bind="{ value, required, autofocus, placeholder, autocomplete, rows, cols }"></textarea>
+                v-bind="{ value, required, autofocus, placeholder, autocomplete, rows, cols, name }"></textarea>
       <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
       <small v-if="subtitle" class="form-text text-muted">
         <slot name="subtitle">{{ subtitle }}</slot>

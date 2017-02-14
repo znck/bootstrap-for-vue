@@ -1,15 +1,15 @@
 <template>
 <div class="form-control input-search">
   <div class="input-search-placeholder" v-if="isEmpty">
-    <slot>
-      <icon :type="icon" class="mr-1" v-if="icon"></icon>
-      <input type="text" class="input-search-proxy" :value="placeholder" readonly tabindex="-1" />
-    </slot>
+    <icon :type="icon" class="mr-1" v-if="icon"></icon>
+    <input type="text" class="input-search-proxy" :value="placeholder" readonly tabindex="-1"/>
   </div>
   <input type="text" class="input-search-suggestion" :value="suggestion" readonly
          v-if="!isEmpty && hasSuggestion && show" tabindex="-1">
-  <input type="search" class="input-search-field" :value="value"
-         @keydown="e => $emit('keydown', e)" @keyup="e => $emit('keyup', e)"
+  <input type="search" class="input-search-field"
+         v-bind="{ autofocus, autocomplete, value }"
+         @keydown="e => $emit('keydown', e)"
+         @keyup="e => $emit('keyup', e)"
          @keypress="e => $emit('keypress', e)"
          @input="$emit('input', $event.target.value)" @focus="onFocus" @blur="onBlur">
 </div>
@@ -36,7 +36,9 @@ export default {
     icon: {
       type: [String, Boolean],
       default: 'search'
-    }
+    },
+    autofocus: [Boolean],
+    autocomplete: [String, Boolean]
   },
 
   data () {
