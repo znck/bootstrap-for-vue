@@ -3,8 +3,10 @@ export default {
     el.setAttribute('data-title', binding.value)
 
     window.jQuery(el).tooltip({
+      animation: false,
       html: binding.modifiers.html || false,
-      placement: binding.arg || 'bottom'
+      placement: binding.arg || 'bottom',
+      trigger: 'hover'
     })
   },
 

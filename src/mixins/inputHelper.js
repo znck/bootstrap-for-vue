@@ -48,10 +48,11 @@ export default {
      */
     nameKey () {
       const inputName = this.inputName
-      const name = this.name
       const expression = this.expression
 
-      return inputName || name || expression
+      if (inputName) return inputName
+
+      return expression
     },
 
     /**
@@ -85,16 +86,14 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     const model = this.getExpression('model')
 
     if (model) {
       this.expression = model.split('.').pop()
     }
     this.updateAttributes()
-  },
 
-  mounted () {
     if (this.autofocus !== false) {
       this.$nextTick(() => {
         const el = this.$el.querySelector('[autofocus]')

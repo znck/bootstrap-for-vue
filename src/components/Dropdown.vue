@@ -67,6 +67,14 @@ export default {
 
     &[selected] {
       font-weight: bolder;
+
+      &:before {
+        content: "\F00C";
+        font: normal normal normal 14px/1 FontAwesome;
+        display: inline-block;
+        margin-left: -17.5px;
+        margin-right: 3.5px;
+      }
     }
   }
 }
