@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-for-vue",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Bootstrap UI for Vue",
   "author": "Rahul Kadyan <hi@znck.me>",
   "main": "dist/bootstrap-for-vue.umd.js",
