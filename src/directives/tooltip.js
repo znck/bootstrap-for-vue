@@ -17,8 +17,6 @@ export default {
   },
 
   unbind (el) {
-    try {
-      window.jQuery(el).tooltip('dispose')
-    } catch (e) {}
+    window.jQuery(el).tooltip('hide').tooltip('dispose')
   }
 }
