@@ -57,7 +57,8 @@ rollup({
     buble({
       objectAssign: 'Object.assign'
     })
-  ]
+  ],
+  external: ['sifter', 'vue-clickaway', 'lodash.debounce']
 }).then(function (bundle) {
   const es = bundle.generate({
     format: 'es'
