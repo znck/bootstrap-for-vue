@@ -2,7 +2,7 @@ export default {
   bind (el, binding) {
     el.setAttribute('data-title', binding.value)
 
-    window.jQuery(el).tooltip({
+    jQuery(el).tooltip({
       animation: false,
       html: binding.modifiers.html || false,
       placement: binding.arg || 'bottom',
@@ -17,6 +17,6 @@ export default {
   },
 
   unbind (el) {
-    window.jQuery(el).tooltip('hide').tooltip('dispose')
+    jQuery(el).tooltip('hide').tooltip('dispose')
   }
 }

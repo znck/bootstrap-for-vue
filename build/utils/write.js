@@ -8,7 +8,7 @@ function mkdir (filename) {
 
   if (!fs.existsSync(filename)) {
     mkdir(dir)
-    fs.mkdir(dir)
+    fs.mkdirSync(dir)
   }
 
   return filename

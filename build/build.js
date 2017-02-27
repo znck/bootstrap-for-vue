@@ -18,8 +18,8 @@ const dirs = {
 }
 
 const {
-    logError,
-    write
+  logError,
+  write
 } = require('./utils')
 
 const banner =
@@ -59,29 +59,29 @@ rollup({
     })
   ]
 }).then(function (bundle) {
-  var es = bundle.generate({
+  const es = bundle.generate({
     format: 'es'
   }).code
 
-  write(`dist/${name}.js`, es)
+  write(`dist/${name}.esm.js`, es)
 
-  var code = bundle.generate({
-    format: 'umd',
+  const code = bundle.generate({
+    format: 'cjs',
     exports: 'named',
     banner: banner,
     moduleName: name
   }).code
 
-  write(`dist/${name}.umd.js`, code)
+  write(`dist/${name}.js`, code)
 
   return code
 }).then(function (code) {
-  var minified = uglify.minify(code, {
+  const minimized = uglify.minify(code, {
     fromString: true,
     output: {
       preamble: banner,
       ascii_only: true
     }
   }).code
-  write(`dist/${name}.umd.min.js`, minified)
+  write(`dist/${name}.min.js`, minimized)
 }).catch(logError)

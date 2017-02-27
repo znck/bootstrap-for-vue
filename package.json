@@ -3,8 +3,8 @@
   "version": "0.1.14",
   "description": "Bootstrap UI for Vue",
   "author": "Rahul Kadyan <hi@znck.me>",
-  "main": "dist/bootstrap-for-vue.umd.js",
-  "module": "dist/bootstrap-for-vue.js",
+  "main": "dist/bootstrap-for-vue.js",
+  "module": "dist/bootstrap-for-vue.esm.js",
   "style": "dist/bootstrap-for-vue.css",
   "scripts": {
     "build": "node build/build.js",

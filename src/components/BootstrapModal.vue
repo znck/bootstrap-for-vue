@@ -71,7 +71,7 @@ export default {
     },
 
     showModal () {
-      this.selector = window.jQuery(this.$el)
+      this.selector = jQuery(this.$el)
       this.selector.modal()
       this.selector.on('hidden.bs.modal', () => {
         this.inDOM = false
