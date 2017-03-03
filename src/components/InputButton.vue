@@ -1,7 +1,8 @@
 <template>
-  <button class="btn" :class="[styles]" role="button" @click="any => $emit('click', any)">
-    <icon v-if="icon" :type="icon" class="mr-2"></icon><slot>{{ value }}</slot>
-  </button>
+<button :type="type" class="btn" :class="[styles]" role="button">
+  <icon v-if="icon" :type="icon" class="mr-2"></icon>
+  <slot>{{ value }}</slot>
+</button>
 </template>
 
 <script>
@@ -16,9 +17,14 @@ export default {
       default: null
     },
 
-    class: {
+    variant: {
       type: String,
-      default: 'btn-primary'
+      default: 'primary'
+    },
+
+    type: {
+      type: String,
+      default: 'button'
     },
 
     value: {
@@ -29,10 +35,13 @@ export default {
 
   computed: {
     styles () {
-      return this.class
+      return [`btn-${this.variant}`]
     }
   },
 
   components: { Icon }
 }
+
+
+
 </script>
