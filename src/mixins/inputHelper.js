@@ -1,5 +1,3 @@
-import getExpression from './getExpression'
-
 export default {
   props: {
     value: { required: true },
@@ -30,22 +28,11 @@ export default {
   },
 
   computed: {
-    /**
-     * Unique ID.
-     *
-     * @property id
-     * @return {string}
-     */
+
     id () {
       return `text${this._uid}`
     },
 
-    /**
-     * Input field name.
-     *
-     * @property nameKey
-     * @type {string}
-     */
     nameKey () {
       const inputName = this.inputName
       const expression = this.expression
@@ -55,12 +42,6 @@ export default {
       return expression
     },
 
-    /**
-     * Get error or feedback for the input field.
-     *
-     * @property feedback
-     * @type {string|null}
-     */
     feedback () {
       const errors = this.errors
       const name = this.nameKey
@@ -87,7 +68,7 @@ export default {
   },
 
   mounted () {
-    const model = this.getExpression('model')
+    const model = this.$vnode.data.model.expression
 
     if (model) {
       this.expression = model.split('.').pop()
@@ -104,7 +85,5 @@ export default {
 
   beforeUpdate () {
     this.updateAttributes()
-  },
-
-  mixins: [getExpression]
+  }
 }
