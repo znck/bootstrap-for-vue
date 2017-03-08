@@ -87,6 +87,7 @@ export default {
 <style lang="scss" module>
 .custom-modal {
   position: fixed;
+  overflow: auto;
   top: 0;
   left: 0;
   right: 0;
@@ -144,7 +145,7 @@ export default {
 
 .wrapper {
   position: relative;
-  height: 100%;
+  min-height: 100%;
   overflow: auto;
   z-index: 1;
 }

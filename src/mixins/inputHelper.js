@@ -19,7 +19,7 @@ export default {
     autocomplete: [String, Boolean],
     autofocus: [Boolean],
     min: {},
-    max: {},
+    max: {}
   },
 
   data () {
