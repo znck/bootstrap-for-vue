@@ -42,29 +42,25 @@ config.vue.css = false // Don't export CSS now!
 
 rollup({
   entry: 'src/index.js',
+
+  external: ['vue'],
+
   plugins: [
-    resolve({
-      jsnext: true,
-      main: true,
-      browser: true,
-    }),
-    commonjs(),
     json(),
     vue(config.vue),
     buble(config.buble),
+
+    resolve({ jsnext: true, main: true, browser: true, skip: ['vue'] }),
+    commonjs(),
   ],
-  globals: {
-    'sifter': 'Sifter',
-    'vue-clickaway': 'clickaway',
-    'lodash.debounce': 'debounce',
-  }
 })
     .then(function (bundle) {
       const code = bundle.generate({
-        format: 'iife',
+        format: 'umd',
         exports: 'named',
         banner: banner,
-        moduleName: name
+        moduleName: name,
+        globals: { 'vue': 'Vue' },
       }).code
 
       write(`dist/${name}.js`, code)
