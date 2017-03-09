@@ -1,7 +1,7 @@
 <template>
 <div class="form-check checkbox" :class="{ 'has-danger': feedback, 'form-check-inline': inline }" :checked="state">
   <label class="indicator">
-    <input v-bind="{ type, required, name, autofocus, autocomplete }" class="custom-control-input" :checked="state" @change="onChange">
+    <input v-bind="{ type, required, name: name || id, autofocus, autocomplete }" class="custom-control-input" :checked="state" @change="onChange">
     <span v-if="title">{{ title || ' ' }}</span>
   </label>
 </div>
@@ -38,7 +38,6 @@ $input-padding-y: .5rem !default;
     }
   }
 }
-
 .custom-control-input {
   position: absolute;
   clip: rect(0, 0, 0, 0);
