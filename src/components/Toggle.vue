@@ -1,10 +1,8 @@
 <template>
-    <div>
-        <label class="toggle">
+    <label class="toggle">
             <input type="checkbox" v-model="currentValue">
             <div class="slider round"></div>
-        </label>
-    </div>
+    </label>
 </template>
 
 <script>
@@ -27,7 +25,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 
     .toggle {
         position: relative;
