@@ -25,6 +25,22 @@ new Vue({
 </script>
 ````
 
+````vue
+<div id="app">
+  Value: {{ checkbox }} <br>
+  
+  <input-switch v-model="checkbox" title="Accept terms & conditions."></input-switch> 
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  
+  data: () => ({ checkbox: false })
+})
+</script>
+````
+
 **Checkbox:** An alternate checkbox.
 ````vue
 <div id="app">
@@ -84,11 +100,12 @@ new Vue({
 <div id="app">
   Checkbox: {{ checkbox }} <br>
   Radio: {{ radio }}  <br>
-  
+ 
   <input-box v-model="checkbox" checkbox="1" title="Checkbox 1" inline></input-box>
   <input-box v-model="checkbox" checkbox="2" title="Checkbox 2" inline custom></input-box> 
-  <input-box v-model="radio" checkbox="3" title="Radio 3" inline></input-box> 
-  <input-box v-model="radio" checkbox="4" title="Radio 4" inline custom></input-box> 
+ 
+  <input-box v-model="radio" radio="3" title="Radio 3" inline></input-box> 
+  <input-box v-model="radio" radio="4" title="Radio 4" inline custom></input-box> 
 </div>
 
 <script>
@@ -100,7 +117,7 @@ new Vue({
 </script>
 ````
 
-**Checkbox:** Multiple options.
+**Checkbox:** Multiple options. Set initial value to an `Array`.
 ````vue
 <div id="app">
   Value: {{ checkbox }} <br>

@@ -56,7 +56,8 @@ module.exports = {
           },
           postcss: [require('postcss-cssnext')()],
           cssModules: {
-            modules: false
+            modules: false,
+            localIdentName: '[local]'
           }
         }
       }
