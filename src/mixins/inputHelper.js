@@ -68,11 +68,12 @@ export default {
   },
 
   mounted () {
-    const model = this.$vnode.data.model.expression
+    const model = this.$vnode.data.model
 
     if (model) {
-      this.expression = model.split('.').pop()
+      this.expression = model.expression.split('.').pop()
     }
+
     this.updateAttributes()
 
     if (this.autofocus !== false) {
