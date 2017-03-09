@@ -1,73 +1,29 @@
-import Alert from './components/Alert.vue'
-import Breadcrumb from './components/Breadcrumb.vue'
-import CheckboxWrapper from './components/CheckboxWrapper.vue'
-import Dropdown from './components/Dropdown.vue'
-import Icon from './components/Icon.vue'
-import InputBox from './components/InputBox'
-import InputButton from './components/InputButton.vue'
-import InputSearch from './components/InputSearch.vue'
-import InputSelect from './components/InputSelect.vue'
-import InputText from './components/InputText.vue'
-import InputTextarea from './components/InputTextarea.vue'
-import InputTypeahead from './components/InputTypeahead.vue'
-import Modal from './components/Modal'
-import Search from './components/Search.vue'
-import Typeahead from './components/Typeahead.vue'
+import * as directives from './directives'
+import * as components from './components'
+import { each } from './utils'
+import { version } from '../package.json'
 
-import Tooltip from './directives/tooltip'
+export { ErrorBag } from './utils'
 
-export { default as formHelper, ErrorBag } from './mixins/formHelper'
+export const plugin = {
+  version,
+  install (Vue, options = {}) {
+    if (options.custom === true) {
+      components.Modal.props.custom.default = true
+      components.InputBox.props.custom.default = true
+    }
 
-export const DIRECTIVES = {
-  Tooltip
-}
-
-export const INPUT = {
-  CheckboxWrapper, // Wrapper for Box
-  InputBox, // Checkbox & Radio
-  InputButton, // Button
-  InputSearch,
-  InputSelect, // Select
-  InputText, // Text, Number etc.
-  InputTextarea,
-  InputTypeahead
-}
-
-export const OTHERS = {
-  Alert,
-  Breadcrumb,
-  Dropdown,
-  Icon,
-  Modal,
-  Search,
-  Typeahead
-}
-
-function each (obj, callback) {
-  Object.keys(obj).forEach(key => callback(obj[key], key))
-}
-
-function installComponents (Vue, components) {
-  each(components, (component, name) => Vue.component(name, component))
-}
-
-function plugin (Vue, options = {}) {
-  installComponents(Vue, INPUT)
-  each(DIRECTIVES, (directive, name) => Vue.directive(name, directive))
-
-  if (options.custom === true) {
-    Modal.props.custom.default = true
-    InputBox.props.custom.default = true
-  }
-
-  if (options.all) {
-    installComponents(Vue, OTHERS)
+    each(components, (component, name) => {
+      if (options.all || name.startsWith('Input') || name === 'CheckboxWrapper') {
+        Vue.component(name, component)
+      }
+    })
+    each(directives, (directive, name) => Vue.directive(name, directive))
   }
 }
 
 // Install by default if using the script tag
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin, window.bootstrapForVueConfig || {})
+if (typeof window !== 'undefined' && 'Vue' in window) {
+  Vue.use(plugin, window.bootstrapForVueConfig || {})
 }
 
-export default plugin

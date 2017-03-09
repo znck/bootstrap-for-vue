@@ -1,4 +1,6 @@
 export default {
+  inject: ['form'],
+
   props: {
     value: { required: true },
     title: { type: String, default: null },
@@ -9,6 +11,7 @@ export default {
       validator (errors) {
         return typeof (errors) === 'object' && typeof (errors.has) === 'function'
       },
+
       default: null
     },
     inputClass: String,
@@ -20,12 +23,10 @@ export default {
     max: {}
   },
 
-  data () {
-    return {
-      expression: null,
-      required: null
-    }
-  },
+  data: () => ({
+    expression: null,
+    required: null,
+  }),
 
   computed: {
 
@@ -44,10 +45,15 @@ export default {
 
     feedback () {
       const errors = this.errors
+      const form = this.form
       const name = this.nameKey
 
       if (errors) {
         return errors.get(name)
+      }
+
+      if (form && form.errors) {
+        return form.errors.get(name)
       }
 
       return null

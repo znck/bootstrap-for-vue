@@ -1,26 +1,15 @@
 const rollup = require('rollup').rollup
 const vue = require('rollup-plugin-vue')
+const json = require('rollup-plugin-json')
 const buble = require('rollup-plugin-buble')
 const uglify = require('uglify-js')
-const CleanCSS = require('clean-css')
-const packageData = require('../package.json')
-const { version, author, name } = packageData
+const { version, author, name } = require('../package.json')
+const config = require('./config')
 
 // remove the email at the end
 const authorName = author.replace(/\s+<.*/, '')
 
-const path = require('path')
-const dirs = {
-  project: path.resolve(__dirname, '../'),
-  src: path.resolve(__dirname, '../src'),
-  dist: path.resolve(__dirname, '../dist'),
-  scss: path.resolve(__dirname, '../dist/scss')
-}
-
-const {
-  logError,
-  write
-} = require('./utils')
+const { logError, write } = require('./utils')
 
 const banner =
     '/*!\n' +
@@ -32,57 +21,55 @@ const banner =
 rollup({
   entry: 'src/index.js',
   plugins: [
-    vue({
-      compileTemplate: true,
-      cssModules: {
-        generateScopedName: 'bootstrap-for-vue-[name]-[local]'
-      },
-      css (_, styles) {
-        let combine = ''
-        const result = styles.map(style => {
-          const filename = style.id.replace(dirs.src, '').replace(/\.vue$/i, '.scss').replace(/^\//, '')
-
-          combine += '@import ' + JSON.stringify(filename.replace(/\.scss$/i, '')) + ';\n'
-
-          write(path.resolve(dirs.scss, filename), style.code.trim())
-
-          return style.$compiled.code
-        }).join('\n')
-
-        write(path.resolve(dirs.scss, `${name}.scss`), combine)
-        write(path.resolve(dirs.dist, `${name}.css`), result)
-        write(path.resolve(dirs.dist, `${name}.min.css`), new CleanCSS().minify(result).styles)
-      }
-    }),
-    buble({
-      objectAssign: 'Object.assign'
-    })
+    json(),
+    vue(config.vue),
+    buble(config.buble),
   ],
-  external: ['sifter', 'vue-clickaway', 'lodash.debounce']
-}).then(function (bundle) {
-  const es = bundle.generate({
-    format: 'es'
-  }).code
+  external: config.external
+})
+    .then(function (bundle) {
+      const es = bundle.generate({
+        format: 'es'
+      }).code
 
-  write(`dist/${name}.esm.js`, es)
+      write(`dist/${name}.esm.js`, es)
 
-  const code = bundle.generate({
-    format: 'cjs',
-    exports: 'named',
-    banner: banner,
-    moduleName: name
-  }).code
+      const code = bundle.generate({
+        format: 'cjs',
+        exports: 'named',
+        banner: banner,
+        moduleName: name
+      }).code
 
-  write(`dist/${name}.js`, code)
+      write(`dist/${name}.js`, code)
 
-  return code
-}).then(function (code) {
-  const minimized = uglify.minify(code, {
-    fromString: true,
-    output: {
-      preamble: banner,
-      ascii_only: true
-    }
-  }).code
-  write(`dist/${name}.min.js`, minimized)
-}).catch(logError)
+      return code
+    })
+    .then(function (code) {
+      const minimized = uglify.minify(code, {
+        fromString: true,
+        output: {
+          preamble: banner,
+          ascii_only: true
+        }
+      }).code
+      write(`dist/${name}.min.js`, minimized)
+    })
+    .catch(logError)
+
+config.vue.css = false
+const entries = ['components.js', 'directives.js', 'mixins.js']
+entries.forEach(entry => {
+  rollup({
+    entry: `src/${entry}`,
+    plugins: [vue(config.vue), buble(config.buble)],
+    external: config.external,
+  })
+      .then(bundle => {
+        const es = bundle.generate({
+          format: 'es'
+        }).code
+
+        write(`dist/${entry}`, es)
+      })
+})

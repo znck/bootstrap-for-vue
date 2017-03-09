@@ -1,59 +1,70 @@
-import { isArray } from '../utils'
-
-export class ErrorBag {
-  constructor (errors) {
-    this.errors = typeof (errors) === 'object' ? errors : {}
-  }
-
-  has (key) {
-    return this.errors.hasOwnProperty(key)
-  }
-
-  get (key) {
-    const value = this.errors[key]
-
-    if (isArray(value)) {
-      return value.join(' ')
-    }
-
-    return value
-  }
-}
-
-function prepareErrors (payload) {
-  return new ErrorBag(payload)
-}
+import { ErrorBag, isObject } from '../utils'
 
 export default {
-  data () {
-    return { formErrors: {}, formStatus: null }
-  },
-  computed: {
-    errors () {
-      const errors = this.formErrors
 
-      return prepareErrors(errors)
-    }
+  provide () {
+    const form = {}
+
+    Object.defineProperties(form, {
+      status: {
+        enumerable: true,
+        get: () => this.$data._formStatus,
+      },
+
+      errors: {
+        enumerable: true,
+        get: () => this.$data._formErrors,
+      },
+    })
+
+    return { form }
   },
+
+  data: () => ({ _formErrors: null, _formStatus: null }),
+
   methods: {
-    setErrors (payload) {
-      this.clearErrors()
 
-      if (payload instanceof Promise) {
-        payload.json()
-          .then(errors => this.$set(this, 'formErrors', errors))
-          .catch(error => this.$set(this, 'formStatus', { message: 'Cannot process form errors.', error }))
-      } else {
-        this.formErrors = payload
+    /**
+     * @deprecated
+     */
+    setErrors (payload) {
+      return this.setFormErrors(payload)
+    },
+
+    /**
+     * @deprecated
+     */
+    clearError (key) {
+      return this.clearFormErrors(key)
+    },
+
+    setFormErrors (payload) {
+      this.clearFormErrors()
+
+      if (!isObject(payload)) return
+
+      this.$data._formErrors = new ErrorBag(payload)
+      if ('$message' in payload) {
+        this.$data._formStatus = payload.$message
       }
     },
-    clearErrors (key) {
-      if (key === undefined) {
-        this.formErrors = {}
-        this.formStatus = null
-      } else if (key in this.formErrors) {
-        this.formErrors[key] = null
+
+    setFormStatus (status) {
+      this.$data._formStatus = status
+    },
+
+    clearFormErrors (key) {
+      if (key !== undefined) {
+        this.$data._formErrors.unset(key)
+      } else {
+        this.$data._formErrors = new ErrorBag({})
+        this.$data._formStatus = null
       }
-    }
+    },
+
+  },
+
+  created () {
+    this.$data._formErrors = new ErrorBag({})
   }
 }
