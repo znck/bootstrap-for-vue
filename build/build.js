@@ -2,6 +2,8 @@ const rollup = require('rollup').rollup
 const vue = require('rollup-plugin-vue')
 const json = require('rollup-plugin-json')
 const buble = require('rollup-plugin-buble')
+const resolve = require('rollup-plugin-node-resolve')
+const commonjs = require('rollup-plugin-commonjs')
 const uglify = require('uglify-js')
 const { version, author, name } = require('../package.json')
 const config = require('./config')
@@ -33,7 +35,31 @@ rollup({
       }).code
 
       write(`dist/${name}.esm.js`, es)
+    })
+    .catch(logError)
 
+config.vue.css = false // Don't export CSS now!
+
+rollup({
+  entry: 'src/index.js',
+  plugins: [
+    resolve({
+      jsnext: true,
+      main: true,
+      browser: true,
+    }),
+    commonjs(),
+    json(),
+    vue(config.vue),
+    buble(config.buble),
+  ],
+  globals: {
+    'sifter': 'Sifter',
+    'vue-clickaway': 'clickaway',
+    'lodash.debounce': 'debounce',
+  }
+})
+    .then(function (bundle) {
       const code = bundle.generate({
         format: 'iife',
         exports: 'named',
@@ -55,9 +81,7 @@ rollup({
       }).code
       write(`dist/${name}.min.js`, minimized)
     })
-    .catch(logError)
 
-config.vue.css = false
 const entries = ['components.js', 'directives.js', 'mixins.js']
 entries.forEach(entry => {
   rollup({
