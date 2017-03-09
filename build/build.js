@@ -23,7 +23,7 @@ rollup({
   plugins: [
     json(),
     vue(config.vue),
-    buble(config.buble),
+    buble(config.buble)
   ],
   external: config.external
 })
@@ -35,7 +35,7 @@ rollup({
       write(`dist/${name}.esm.js`, es)
 
       const code = bundle.generate({
-        format: 'cjs',
+        format: 'iife',
         exports: 'named',
         banner: banner,
         moduleName: name
@@ -50,7 +50,7 @@ rollup({
         fromString: true,
         output: {
           preamble: banner,
-          ascii_only: true
+          ascii_only: true // eslint-disable-line camelcase
         }
       }).code
       write(`dist/${name}.min.js`, minimized)
@@ -63,7 +63,7 @@ entries.forEach(entry => {
   rollup({
     entry: `src/${entry}`,
     plugins: [vue(config.vue), buble(config.buble)],
-    external: config.external,
+    external: config.external
   })
       .then(bundle => {
         const es = bundle.generate({

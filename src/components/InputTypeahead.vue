@@ -48,7 +48,7 @@ export default {
       const value = this.value instanceof Array ? this.value : [this.value]
 
       return items.filter(item => value.indexOf(item[key]) > -1)
-    },
+    }
   },
 
   methods: {

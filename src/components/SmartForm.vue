@@ -19,7 +19,7 @@ export default {
       type: String,
       default: 'mb-3'
     }
-  },
+  }
 
 }
 </script>

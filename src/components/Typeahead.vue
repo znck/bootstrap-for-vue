@@ -2,7 +2,8 @@
 <dropdown class="bootstrap-for-vue-typeahead" v-on-click-away="close"
           v-bind="{ items, show, component, itemKey: suggestionValue, active: index, selected }"
           @select="onItemSelected">
-  <search-field v-bind="{ placeholder, suggestion, icon, name, autocomplete, autofocus }" v-model="query" :class="[inputClass]"
+  <search-field v-bind="{ placeholder, suggestion, icon, name, autocomplete, autofocus }" v-model="query"
+                :class="[inputClass]"
                 @input="val => $emit('search', val)"
                 @keydown.down="onDown" @keydown.up="onUp"
                 @keydown.enter.prevent="onEnter"
@@ -59,6 +60,8 @@ export default {
       type: Boolean,
       default: true
     },
+
+    name: String,
 
     ...mapObject(SearchField.props, ['placeholder', 'icon', 'autofocus', 'autocomplete'])
   },

@@ -24,6 +24,6 @@ export const plugin = {
 
 // Install by default if using the script tag
 if (typeof window !== 'undefined' && 'Vue' in window) {
-  Vue.use(plugin, window.bootstrapForVueConfig || {})
+  Vue.use(plugin, window.bootstrapForVueConfig || {}) // eslint-disable-line no-undef
 }
 

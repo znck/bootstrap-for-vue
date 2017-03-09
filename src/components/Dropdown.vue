@@ -8,7 +8,8 @@
            v-bind="{ active: active === index, selected: selected.indexOf(item) > -1, item}"
            :is="component" :key="item" role="button"
            @click.native.prevent="$emit('select', item)"
-           @click.prevent="$emit('select', item)">{{ item[itemKey] }}</div>
+           @click.prevent="$emit('select', item)">{{ item[itemKey] }}
+      </div>
     </slot>
   </div>
   <div class="dropdown-menu" v-else>
@@ -28,7 +29,8 @@ export default {
     active: {},
 
     selected: {
-      type: [Array]
+      type: Array,
+      default: () => []
     },
 
     type: {
@@ -40,7 +42,7 @@ export default {
 
     items: {
       type: Array,
-      required: true
+      default: () => []
     },
 
     itemKey: {

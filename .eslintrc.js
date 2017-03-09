@@ -5,6 +5,9 @@ module.exports = {
     sourceType: 'module'
   },
   extends: 'vue',
+  globals: {
+    'jQuery': true,
+  },
   // add your custom rules here
   'rules': {
     // allow async-await

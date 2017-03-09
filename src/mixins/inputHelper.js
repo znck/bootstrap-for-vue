@@ -1,3 +1,5 @@
+import { ErrorBag } from '../utils'
+
 export default {
   inject: ['form'],
 
@@ -9,7 +11,7 @@ export default {
     inputName: { type: String, default: null },
     errors: {
       validator (errors) {
-        return typeof (errors) === 'object' && typeof (errors.has) === 'function'
+        return !errors || errors instanceof ErrorBag
       },
 
       default: null
@@ -25,7 +27,7 @@ export default {
 
   data: () => ({
     expression: null,
-    required: null,
+    required: null
   }),
 
   computed: {

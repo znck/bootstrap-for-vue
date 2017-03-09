@@ -8,13 +8,13 @@ export default {
     Object.defineProperties(form, {
       status: {
         enumerable: true,
-        get: () => this.$data._formStatus,
+        get: () => this.$data._formStatus
       },
 
       errors: {
         enumerable: true,
-        get: () => this.$data._formErrors,
-      },
+        get: () => this.$data._formErrors
+      }
     })
 
     return { form }
@@ -60,7 +60,7 @@ export default {
         this.$data._formErrors = new ErrorBag({})
         this.$data._formStatus = null
       }
-    },
+    }
 
   },
 

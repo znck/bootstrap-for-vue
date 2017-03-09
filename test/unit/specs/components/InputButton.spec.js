@@ -26,7 +26,7 @@ describe('InputButton.vue', function () {
   it('should accept button value', function () {
     const vm = getComponent(this, '<input-button value="Foo" />')
 
-    vm.$el.should.text('Foo')
+    vm.$el.should.text(' Foo')
   })
 
   it('should accept class', function () {

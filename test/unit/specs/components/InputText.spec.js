@@ -61,7 +61,7 @@ describe('InputText.vue', function () {
   })
 
   it('should provide feedback on error', function () {
-    const vm = getComponent(this, `<input-text v-model="value" name="name" :errors="errors" />`, { name: 'name', errors: makeErrors({ name: 'Name is required.' }) })
+    const vm = getComponent(this, `<input-text v-model="value" input-name="name" :errors="errors" />`, { name: 'name', errors: makeErrors({ name: 'Name is required.' }) })
 
     const group = vm.$el
     const feedback = vm.$('.form-control-feedback')

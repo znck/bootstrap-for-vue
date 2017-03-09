@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { ErrorBag } from 'src/mixins/formHelper'
+import { ErrorBag } from 'src/utils'
 
-export function render (context, component) {
+export function render(context, component) {
   if (!context.DOM) {
     const app = new Vue(component)
     context.$ = app.$ = s => app.$el.querySelector(s)
@@ -37,6 +37,6 @@ export function render (context, component) {
   }
 }
 
-export function makeErrors (any) {
+export function makeErrors(any) {
   return new ErrorBag(any)
 }
