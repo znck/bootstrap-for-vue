@@ -24,9 +24,12 @@ $btn-primary-bg: #0275d8 !default;
 $btn-primary-border: #0275d8 !default;
 $btn-secondary-bg: #ccc !default;
 
-$input-border-color: rgba(#000, .15) !default;
 $input-padding-x: .75rem !default;
 $input-padding-y: .5rem !default;
+
+$input-switch-button: $btn-primary-bg !default;
+$input-switch-bg: $btn-secondary-bg !default;
+$input-switch-border: $btn-primary-border !default;
 
 $input-switch-height: 1rem + $input-padding-y;
 $input-switch-width: 2.5 * $input-switch-height;
@@ -36,7 +39,8 @@ $input-switch-width: 2.5 * $input-switch-height;
   .slider {
     cursor: pointer;
     position: relative;
-    background-color: $btn-secondary-bg;
+    background-color: $input-switch-bg;
+    border: 1px solid $input-switch-border;
     transition: .4s;
     height: $input-switch-height;
     width: $input-switch-width;
@@ -62,7 +66,7 @@ $input-switch-width: 2.5 * $input-switch-height;
 
   &[checked] {
     .slider {
-      background-color: $btn-primary-bg;
+      background-color: $input-switch-button;
       &:before {
         transform: translateX($input-switch-width - $input-switch-height -  $input-switch-height * .05);
       }
@@ -70,7 +74,7 @@ $input-switch-width: 2.5 * $input-switch-height;
   }
 
   input:focus + .slider {
-    box-shadow: 0 0 1px $btn-primary-border;
+    box-shadow: 0 0 1px $input-switch-bg;
   }
 
   &.round {
