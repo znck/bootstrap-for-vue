@@ -6,7 +6,7 @@ import { version } from '../package.json'
 export { formHelper } from './mixins'
 export { ErrorBag } from './utils'
 
-export const plugin = {
+const plugin = {
   version,
   install (Vue, options = {}) {
     if (options.custom === true) {
@@ -22,6 +22,8 @@ export const plugin = {
     each(directives, (directive, name) => Vue.directive(name, directive))
   }
 }
+
+export default plugin
 
 // Install by default if using the script tag
 if (typeof window !== 'undefined' && 'Vue' in window) {
