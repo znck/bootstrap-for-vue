@@ -3,6 +3,7 @@ import * as components from './components'
 import { each } from './utils'
 import { version } from '../package.json'
 
+export { formHelper } from './mixins'
 export { ErrorBag } from './utils'
 
 export const plugin = {
@@ -26,4 +27,3 @@ export const plugin = {
 if (typeof window !== 'undefined' && 'Vue' in window) {
   Vue.use(plugin, window.bootstrapForVueConfig || {}) // eslint-disable-line no-undef
 }
-
