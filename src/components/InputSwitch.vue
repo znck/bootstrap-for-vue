@@ -27,7 +27,8 @@ $btn-secondary-bg: #ccc !default;
 $input-padding-x: .75rem !default;
 $input-padding-y: .5rem !default;
 
-$input-switch-button: $btn-primary-bg !default;
+$input-switch-button: white !default;
+$input-switch-button-active: $btn-primary-bg !default;
 $input-switch-bg: $btn-secondary-bg !default;
 $input-switch-border: $btn-primary-border !default;
 
@@ -47,17 +48,16 @@ $input-switch-width: 2.5 * $input-switch-height;
 
     display: inline-block;
 
-    margin-right: $input-padding-x;
-    margin-bottom: - $input-padding-y / 1.95;
+    margin-bottom: - $input-padding-y / 2;
 
     &:before {
       position: absolute;
       content: '';
-      height: $input-switch-height * .9;
-      width: $input-switch-height * .9;
-      background-color: white;
-      left: $input-switch-height * .05;
-      top: $input-switch-height * .05;
+      height: $input-switch-height;
+      width: $input-switch-height;
+      background-color: $input-switch-button;
+      left: 0;
+      top: 0;
       margin: 0 1px;
 
       transition: .4s;
@@ -66,15 +66,11 @@ $input-switch-width: 2.5 * $input-switch-height;
 
   &[checked] {
     .slider {
-      background-color: $input-switch-button;
+      background-color: $input-switch-button-active;
       &:before {
-        transform: translateX($input-switch-width - $input-switch-height -  $input-switch-height * .05);
+        transform: translateX($input-switch-width - $input-switch-height);
       }
     }
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px $input-switch-bg;
   }
 
   &.round {
