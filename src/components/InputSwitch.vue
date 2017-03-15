@@ -9,7 +9,7 @@
 </label>
 </template>
 
-<script lang="babel">
+<script lang="babel" module>
 import checkbox from '../mixins/checkbox'
 
 export default {
@@ -19,57 +19,75 @@ export default {
 }
 </script>
 
-<style lang="scss" module>
+<style lang="scss">
 $btn-primary-bg: #0275d8 !default;
-$btn-primary-border: #0275d8 !default;
-$btn-secondary-bg: #ccc !default;
+$btn-secondary-bg: #eee !default;
 
 $input-padding-x: .75rem !default;
 $input-padding-y: .5rem !default;
 
 $input-switch-button: white !default;
-$input-switch-button-active: $btn-primary-bg !default;
+$input-switch-bg-active: $btn-primary-bg !default;
 $input-switch-bg: $btn-secondary-bg !default;
-$input-switch-border: $btn-primary-border !default;
 
-$input-switch-height: 1rem + $input-padding-y;
+$input-switch-height: 1rem !default;
 $input-switch-width: 2.5 * $input-switch-height;
-.switch {
-  padding: $input-padding-y $input-padding-x;
+$circle: $input-switch-height * 1.25;
 
+.switch {
   .slider {
     cursor: pointer;
     position: relative;
-    background-color: $input-switch-bg;
-    border: 1px solid $input-switch-border;
-    transition: .4s;
+
+    outline: none;
+    user-select: none;
+    padding: 2px;
+    margin-bottom: -2px;
+
     height: $input-switch-height;
     width: $input-switch-width;
 
+    background: $input-switch-bg;
+    transition: backgound 0.4s;
+
     display: inline-block;
 
-    margin-bottom: - $input-padding-y / 2;
-
-    &:before {
+    &:after {
+      display: block;
       position: absolute;
       content: '';
-      height: $input-switch-height;
-      width: $input-switch-height;
-      background-color: $input-switch-button;
-      left: 0;
-      top: 0;
-      margin: 0 1px;
 
-      transition: .4s;
+      height: $circle;
+      width: $circle;
+
+      background: $input-switch-button;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+      margin: auto 0;
+
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      transition: background 0.4s, left 0.4s, height 0.2s, width 0.2s;
     }
   }
 
   &[checked] {
     .slider {
-      background-color: $input-switch-button-active;
-      &:before {
-        transform: translateX($input-switch-width - $input-switch-height);
+      box-shadow: inset 0 0 0 $input-switch-height lighten($input-switch-bg-active, 25%);
+      // background: lighten($input-switch-bg-active, 50%);
+
+      &:after {
+        left: calc(100% - #{$circle});
+        background: $input-switch-bg-active;
       }
+    }
+  }
+
+  &:active {
+    .slider:after {
+      height: $circle / 1.1;
+      width: $circle * 1.2;
     }
   }
 
@@ -77,7 +95,7 @@ $input-switch-width: 2.5 * $input-switch-height;
     .slider {
       border-radius: $input-switch-height / 2;
 
-      &:before {
+      &:after {
         border-radius: 50%;
       }
     }

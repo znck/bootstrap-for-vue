@@ -16,7 +16,7 @@ describe('Alert.vue', function () {
     )
 
     vm.$el.should.exist
-      .and.have.text('×This is an alert.')
+      .and.have.text('× This is an alert.')
   })
 
   it('should render error', function () {
@@ -26,7 +26,7 @@ describe('Alert.vue', function () {
     )
 
     vm.$el.should.exist
-      .and.have.text('×This is an alert.')
+      .and.have.text('× This is an alert.')
   })
 
   it('should render warning', function () {
@@ -36,7 +36,7 @@ describe('Alert.vue', function () {
     )
 
     vm.$el.should.exist
-      .and.have.text('×This is an alert.')
+      .and.have.text('× This is an alert.')
   })
 
   it('should render info', function () {
@@ -46,7 +46,7 @@ describe('Alert.vue', function () {
     )
 
     vm.$el.should.exist
-      .and.have.text('×This is an alert.')
+      .and.have.text('× This is an alert.')
   })
 
   it('should render with message', function () {
@@ -56,17 +56,17 @@ describe('Alert.vue', function () {
     )
 
     vm.$el.should.exist
-      .and.have.text('×This is an alert.')
+      .and.have.text('× This is an alert.')
   })
 
-  it('should not be dismissable', function () {
+  it('should not be dismissible', function () {
     const vm = getComponent(
       this,
-      '<alert :dismissable="false" message="This is an alert."/>'
+      '<alert :dismissible="false" message="This is an alert."/>'
     )
 
     vm.$el.should.exist
-      .and.have.text('This is an alert.')
+      .and.have.text(' This is an alert.')
   })
 
   it('should render custom html', function () {

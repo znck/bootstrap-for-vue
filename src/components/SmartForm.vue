@@ -2,7 +2,7 @@
 <form @submit.prevent="any => $emit('submit')">
   <input type="submit" hidden>
 
-  <alert :class="alertClass" type="danger" v-if="form && form.status" v-html="form.status"/>
+  <alert :class="alertClass" type="danger" v-if="form && form.status" v-html="form.status"></alert>
 
   <slot></slot>
 </form>
