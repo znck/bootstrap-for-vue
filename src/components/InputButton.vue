@@ -17,7 +17,7 @@ export default {
       default: null
     },
 
-    variant: {
+    theme: {
       type: String,
       default: 'primary'
     },
@@ -35,7 +35,7 @@ export default {
 
   computed: {
     styles () {
-      return [`btn-${this.variant}`]
+      return [`btn-${this.theme}`]
     }
   },
 
