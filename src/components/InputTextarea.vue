@@ -36,7 +36,7 @@ export default {
 
   computed: {
     resizableClass () {
-      const resize = this.resizable
+      const resize = this.resizeable
 
       if (resize === true) return 'resizable'
       if (resize === false) return 'resizable-none'
