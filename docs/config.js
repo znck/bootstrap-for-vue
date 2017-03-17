@@ -1,4 +1,4 @@
-self.$config = {
+const config = {
   repo: 'znck/bootstrap-for-vue',
 
   'edit-link': 'https://github.com/znck/bootstrap-for-vue/edit/master/docs',
@@ -45,3 +45,5 @@ self.$config = {
 
   url: 'http://bootstrap-for-vue.znck.me'
 }
+
+docute.init(config)
