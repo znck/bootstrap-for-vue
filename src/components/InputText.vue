@@ -34,9 +34,10 @@ export default {
 $form-group-required-color: red !default;
 
 .form-group[required] {
-  label.form-control-label:after {
+  label.form-control-label::after {
     color: $form-group-required-color;
     content: '*';
+    font-size: .75rem;
     vertical-align: top;
   }
 }

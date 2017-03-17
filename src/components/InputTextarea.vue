@@ -3,7 +3,7 @@
       <label v-if="title" :for="id" class="form-control-label">
         <slot>{{ title }}</slot>
       </label>
-      <textarea :id="id" type="text" class="form-control" :class="[ resizeableClass, inputClass ]"
+      <textarea :id="id" type="text" class="form-control" :class="[ resizableClass, inputClass ]"
                 @input="$emit('input', $event.target.value)"
                 v-bind="{ value, required, autofocus, placeholder, autocomplete, rows, cols, name }"></textarea>
       <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
@@ -22,7 +22,7 @@ export default {
   props: {
     resizeable: {
       type: [String, Boolean],
-      default: 'none'
+      default: ''
     },
     rows: {
       type: Number,

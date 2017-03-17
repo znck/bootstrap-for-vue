@@ -1,6 +1,8 @@
 <template>
   <div class="form-group" :class="{ 'has-danger': feedback }">
-     <label v-if="title" :for="id" class="form-control-label">{{ title }}</label>
+     <label v-if="title" :for="id" class="form-control-label">
+       <slot>{{ title }}</slot>
+     </label>
      <select class="form-control custom-select" :class="[inputClass]"
              @input="$emit('input', $event.target.value)"
              v-bind="{ id, value, required, autofocus, multiple, name }">
@@ -9,7 +11,9 @@
                :disabled="getDisabled(option)">{{ getDisplay(option) }}</option>
      </select>
       <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
-      <small v-if="subtitle" class="form-text text-muted">{{ subtitle }}</small>
+      <small v-if="subtitle" class="form-text text-muted">
+        <slot name="subtitle">{{ subtitle }}</slot>
+      </small>
   </div>
 </template>
 
