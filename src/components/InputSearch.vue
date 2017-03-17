@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script>
+<script lang="babel">
 import inputHelper from '../mixins/inputHelper'
 import SearchField from './Search.vue'
 
