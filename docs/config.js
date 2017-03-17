@@ -23,7 +23,7 @@ self.$config = {
     docuteIframe({
       prepend: `
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/bootstrap-for-vue/dist/bootstrap-for-vue.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-for-vue@latest/dist/bootstrap-for-vue.min.css">
         
         <style>
         [id^=app] { padding: 16px }
@@ -38,7 +38,7 @@ self.$config = {
         <script src="https://unpkg.com/vue/dist/vue.js"></script>
         
         <!-- require bootstrap-for-vue -->
-        <script src="https://unpkg.com/bootstrap-for-vue/dist/bootstrap-for-vue.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-for-vue@latest/dist/bootstrap-for-vue.min.js"></script>
       `
     })
   ],
