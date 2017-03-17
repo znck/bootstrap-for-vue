@@ -14,8 +14,11 @@ sidebar: false
 
 ## Introduction
 **Bootstrap for Vue** is collection of bootstrap 4 based reusable components. It is used by 
-[Vue Issue](https://new-issue.vuejs.org) and [Zero](https://zero.institute). 
+[Vue Issue](https://new-issue.vuejs.org) and [Zero](https://zero.institute).
+ 
+It would always support [Vue InterOp](https://github.com/znck/vue-interop) standards.
 
+## Installation
 ```bash
 # Using yarn
 yarn add bootstrap-for-vue
@@ -25,4 +28,39 @@ npm install bootstrap-for-vue
 
 ```
 
-It would always support [Vue InterOp](https://github.com/znck/vue-interop) standards.
+## Usage
+
+#### In browser
+
+```html
+<!--In Head-->
+<link rel="stylesheet" href="//unpkg.com/bootstrap-for-vue/dist/bootstrap-for-vue.min.css">
+
+<!--After Vue script tag-->
+<script src="//unpkg.com/bootstrap-for-vue/dist/bootstrap-for-vue.min.js"></script>
+```
+
+#### With webpack/rollup
+
+```js
+import Vue from 'vue'
+import VueBootstrap from 'bootstrap-for-vue'
+// You can import styles in js too.
+import 'bootstrap-for-vue/dist/bootstrap-for-vue.scss'
+// or
+import 'bootstrap-for-vue/dist/bootstrap-for-vue.css' 
+
+Vue.use(VueBootstrap)
+```
+
+**Including styles** using scss. You can override all variables too.
+```scss
+@import '~bootstrap-for-vue/dist/bootstrap-for-vue';
+// or
+@import './node_modules/bootstrap-for-vue/dist/bootstrap-for-vue';
+```
+
+**Including styles** with style tag.
+```vue
+<style src="./node_modules/bootstrap-for-vue/dist/bootstrap-for-vue.css"></style>
+```

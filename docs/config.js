@@ -8,6 +8,9 @@ self.$config = {
   nav: [
     { title: 'Home', path: '/' },
     { title: 'Components', path: '/components' },
+    { title: 'Directives', path: '/directives' },
+    { title: 'Mixins', path: '/mixins' },
+    { title: 'Styles', path: '/styles' },
   ],
 
   plugins: [

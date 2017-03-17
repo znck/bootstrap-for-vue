@@ -1,7 +1,7 @@
 # Components
 -- Description. --
 
-## InputComponents
+## Input Components
 
 #### InputBox
 It uses [bootstrap checkbox & radios](https://v4-alpha.getbootstrap.com/components/forms/#checkboxes-and-radios) to render a choice/box input. 
@@ -291,3 +291,33 @@ new Vue({
 | suggestion            | String                  | -                     | - | Typeahead shadow text 
 | title                 | String                  | `null`                | - | Input field cue
 | value                 | Boolean, Array          | -                     | yes |
+
+#### InputSelect
+
+#### InputSwitch
+
+#### InputText
+
+#### InputTextarea
+
+#### InputTypeahead
+
+## Other Components
+
+#### Alert
+
+#### Breadcrumb
+
+#### Dropdown
+
+#### Modal
+
+#### Icon
+
+#### SmartForm
+
+## Internals
+
+#### Search
+
+#### Typeahead
