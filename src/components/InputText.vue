@@ -4,7 +4,7 @@
     <slot>{{ title }}</slot>
   </label>
   <input :id="id" class="form-control" :class="[inputClass]"
-         @input="$emit('input', $event.target.value)"
+         @input="$emit('input', $event.target.value)" @blur="e => $emit('blur', e)"
          v-bind="{ type, value, required, autofocus, placeholder, autocomplete, min, max, name }">
   <div v-if="feedback" class="form-control-feedback">{{ feedback }}</div>
   <small v-if="subtitle" class="form-text text-muted">
