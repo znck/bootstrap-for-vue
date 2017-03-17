@@ -35,7 +35,7 @@ self.$config = {
         <script src="https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/js/bootstrap.min.js"></script>
         
         <!-- require vue -->
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
         
         <!-- require bootstrap-for-vue -->
         <script src="https://unpkg.com/bootstrap-for-vue@latest/dist/bootstrap-for-vue.min.js"></script>
