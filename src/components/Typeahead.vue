@@ -266,7 +266,7 @@ export default {
 </script>
 
 <style lang="scss">
-$input-border-color: #777 !default;
+$input-border-color: rgba(0,0,0,.15) !default;
 
 .bootstrap-for-vue-typeahead {
   position: relative;
