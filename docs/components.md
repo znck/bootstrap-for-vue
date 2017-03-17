@@ -281,7 +281,7 @@ new Vue({
 | :-------------------- | :---------------------- | --------------------- | -------- | --------------                      
 | autocomplete          | Boolean, String         | -                     | - | Same as HTML attribute
 | autofocus             | Boolean                 | `false`               | - | Same as HTML attribute
-| errors                | [ErrorBag](/mixins/#ErrorBag)                | Injected by [formHelper](/mixins#formHelper) | - | It is automatically set to correct value using `provide/inject`. In most cases you won't have to care about it.  
+| errors                | [ErrorBag](/helpers#ErrorBag)                | Injected by [formHelper](/mixins#formHelper) | - | It is automatically set to correct value using `provide/inject`. In most cases you won't have to care about it.  
 | name                  | String                  | `null`                | - | Same as HTML attribute
 | input-class            | String                  | `null`               | - | Add CSS `class` to underlying `<input>` element.
 | input-name            | String                  | `null`                | - | Used for accessing validation errors. <br> If not provided, `v-model` expression is used. <br> e.g. `... v-model="foo" ...` then `input-name` is `'foo'` <br> e.g. `... v-model="attributes.bar" ...` then `input-name` is `'bar'`

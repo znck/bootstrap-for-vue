@@ -11,6 +11,7 @@ self.$config = {
     { title: 'Directives', path: '/directives' },
     { title: 'Mixins', path: '/mixins' },
     { title: 'Styles', path: '/styles' },
+    { title: 'Helpers', path: '/helpers' },
   ],
 
   plugins: [
