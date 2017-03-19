@@ -4,32 +4,8 @@
 
 > Bootstrap UI for Vue
 
-## Installation
-
-```bash
-npm install --save bootstrap-for-vue
-```
-
-## Usage
-
-### Bundler (Webpack, Rollup)
-
-```js
-import Vue from 'vue'
-import bootstrap-for-vue from 'bootstrap-for-vue'
-// You need a specific loader for CSS files like https://github.com/webpack/css-loader
-import 'bootstrap-for-vue/dist/bootstrap-for-vue.css'
-
-Vue.use(bootstrap-for-vue)
-```
-
-### Browser
-
-```html
-<!-- Include after Vue -->
-<link rel="stylesheet" href="bootstrap-for-vue/dist/bootstrap-for-vue.css"></link>
-<script src="bootstrap-for-vue/dist/bootstrap-for-vue.js"></script>
-```
+## Documentation
+http://bootstrap-for-vue.znck.me/
 
 ## Development
 
