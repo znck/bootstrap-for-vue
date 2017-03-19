@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/bootstrap-for-vue.svg)](https://www.npmjs.com/package/bootstrap-for-vue) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 
-> Bootstrap UI for Vue
+> Looking to contribute? Take up a task from [Dev Board](https://github.com/znck/bootstrap-for-vue/projects/1)
 
 ## Documentation
 http://bootstrap-for-vue.znck.me/
