@@ -60,7 +60,7 @@ Vue.use(VueBootstrap)
 @import './node_modules/bootstrap-for-vue/dist/bootstrap-for-vue';
 ```
 
-**Including styles** with style tag.
+**Including styles** with style tag in single file component (.vue file).
 ```vue
 <style src="./node_modules/bootstrap-for-vue/dist/bootstrap-for-vue.css"></style>
 ```
