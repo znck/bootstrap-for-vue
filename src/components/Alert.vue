@@ -21,7 +21,7 @@ export default {
 
     type: {
       type: String,
-      default: 'default'
+      default: 'info'
     },
 
     dismissible: {

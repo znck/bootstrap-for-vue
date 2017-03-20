@@ -949,7 +949,7 @@ new Vue({ el: '#app' })
 </script>
 ````
 
-Types of alerts: `default`, `info`, `success`, `danger` & `warning`
+Types of alerts: `info`, `success`, `danger` & `warning`
 ````vue
 <div id="app">
   <alert type="info">This is an info alert message.</alert>
@@ -994,7 +994,7 @@ Name                  | Type                    | Default               | Requir
 ----------------------|-------------------------|-----------------------|----------|-----------
 dismissible           | Boolean                 | `true`                 | -        | Is alert dismissible?
 message               | String                  | -                     | -        | Contents of the alert message.
-type                  | String                 | `'default'`            | -        | One of `default`, `info`, `success`, `danger` & `warning`
+type                  | String                 | `'info'`            | -        | One of `info`, `success`, `danger` & `warning`
 
 ##### Slots
 Name | Description
