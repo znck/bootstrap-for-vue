@@ -15,11 +15,11 @@ const config = {
   ],
 
   plugins: [
-    // docsearch({
-    //   apiKey: 'You API Key',
-    //   indexName: 'rollup-plugin-vue-docs',
-    //   tags: ['en']
-    // }),
+    docsearch({
+      apiKey: '4f8ad9afa2cf0f5f101852754018a29a',
+      indexName: 'bootstrap-for-vue',
+      tags: ['en']
+    }),
     docuteIframe({
       prepend: `
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/css/bootstrap.min.css">
