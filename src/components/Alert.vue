@@ -1,7 +1,7 @@
 <template>
-<div class="alert" :class="[`alert-${type}`]" role="alert">
+<div class="alert" :class="[`alert-${type}`]" role="alert" v-if="! (dismissible && dismissed)">
   <button
-          v-show="dismissible"
+          v-if="dismissible"
           type="button" class="close" aria-label="Close"
           @click="dismiss">
     <span aria-hidden="true">&times;</span>
@@ -10,7 +10,7 @@
 </div>
 </template>
 
-<script>
+<script lang="babel">
 export default {
   name: 'Alert',
 
@@ -30,6 +30,8 @@ export default {
     }
   },
 
+  data: () => ({ dismissed: false }),
+
   methods: {
     /**
      * Dismiss alert.
@@ -37,10 +39,10 @@ export default {
      * @return {undefined}
      */
     dismiss () {
+      this.dismissed = true
+
       this.$emit('dismiss')
     }
   }
 }
-
-
 </script>

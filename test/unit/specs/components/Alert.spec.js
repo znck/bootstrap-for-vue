@@ -66,7 +66,21 @@ describe('Alert.vue', function () {
     )
 
     vm.$el.should.exist
-      .and.have.text(' This is an alert.')
+    expect(vm.$('button')).to.be.null
+  })
+
+  it('should be dismissible', function () {
+    const vm = getComponent(
+      this,
+      '<alert dismissible message="This is an alert."/>'
+    )
+
+    vm.$el.should.exist
+    vm.$('button').click()
+
+    return vm.tick().then(() => {
+      expect(vm.$el.nodeType).to.be.equal(8)
+    })
   })
 
   it('should render custom html', function () {

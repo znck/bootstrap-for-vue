@@ -924,9 +924,27 @@ Name | Description
 default | Input field title
 subtitle | Input field subtitle
 
+##### Events
+Name  | Payload | Description
+------|---------|------------
+search | String | Value in typeahead search field
+enter | Event | Native `keypress` event
+blur | Event | Native `blur` event
+
 ## Other Components
 
 #### Alert
+Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
+This component is available as `<alert>` or `<vb-alert>` (web component spec complaint).
+
+##### Examples
+A simple alert message
+
+````vue
+<div id="app">
+  <alert>This is an alert message.</alert>
+</div>
+````
 
 #### Breadcrumb
 

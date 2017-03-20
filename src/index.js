@@ -14,11 +14,7 @@ const plugin = {
       components.InputBox.props.custom.default = true
     }
 
-    each(components, (component, name) => {
-      if (options.all || name.startsWith('Input') || name === 'CheckboxWrapper') {
-        Vue.component(name, component)
-      }
-    })
+    each(components, (component, name) => Vue.component(name, component))
     each(directives, (directive, name) => Vue.directive(name, directive))
   }
 }
