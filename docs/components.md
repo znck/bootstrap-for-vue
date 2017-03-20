@@ -939,12 +939,72 @@ This component is available as `<alert>` or `<vb-alert>` (web component spec com
 
 ##### Examples
 A simple alert message
-
 ````vue
 <div id="app">
   <alert>This is an alert message.</alert>
 </div>
+
+<script>
+new Vue({ el: '#app' })
+</script>
 ````
+
+Types of alerts: `default`, `info`, `success`, `danger` & `warning`
+````vue
+<div id="app">
+  <alert type="info">This is an info alert message.</alert>
+  <alert type="success">This is a success alert message.</alert>
+  <alert type="warning">This is a warning alert message.</alert>
+  <alert type="danger">This is a danger alert message.</alert>
+</div>
+
+<script>
+  new Vue({ el: '#app' })
+</script>
+````
+
+Non-dismissible alert
+````vue
+<div id="app">
+  <alert :dismissible="false">This is a non-dismissible alert message.</alert>
+</div>
+
+<script>
+  new Vue({ el: '#app' })
+</script>
+````
+
+Alert with `message` prop.
+````vue
+<div id="app">
+  <alert :message="text"></alert>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    
+    data: () => ({ text: 'This is a non-dismissible alert message.' })
+  })
+</script>
+````
+
+##### Props
+Name                  | Type                    | Default               | Required | Remarks
+----------------------|-------------------------|-----------------------|----------|-----------
+dismissible           | Boolean                 | `true`                 | -        | Is alert dismissible?
+message               | String                  | -                     | -        | Contents of the alert message.
+type                  | String                 | `'default'`            | -        | One of `default`, `info`, `success`, `danger` & `warning`
+
+##### Slots
+Name | Description
+-----|------------
+Default | Body of alert
+
+##### Events
+Name | Payload | Description
+-----|---------|-------------
+dismiss | - | Emitted on dismiss button click 
 
 #### Breadcrumb
 
