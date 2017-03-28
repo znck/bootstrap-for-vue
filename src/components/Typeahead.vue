@@ -23,6 +23,7 @@ import debounce from 'lodash.debounce'
 import SearchField from './Search.vue'
 import Dropdown from './Dropdown.vue'
 import { mapObject, isArray, isObject } from '../utils'
+import inherit from '../mixins/inheritComponents'
 
 export default {
   props: {
@@ -260,13 +261,15 @@ export default {
 
   components: { Dropdown, SearchField },
 
-  directives: { onClickAway }
+  directives: { onClickAway },
+
+  mixins: [inherit]
 }
 
 </script>
 
 <style lang="scss">
-$input-border-color: rgba(0,0,0,.15) !default;
+$input-border-color: rgba(0, 0, 0, .15) !default;
 
 .bootstrap-for-vue-typeahead {
   position: relative;

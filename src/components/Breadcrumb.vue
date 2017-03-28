@@ -1,12 +1,15 @@
 <template>
-  <nav class="breadcrumb">
-    <div :is="component" v-for="crumb in crumbs"
-      class="breadcrumb-item" :to="crumb.link"
-      active-class="active">{{ crumb.title }}</div>
-  </nav>
+<nav class="breadcrumb">
+  <div :is="component" v-for="crumb in crumbs"
+       class="breadcrumb-item" :to="crumb.link"
+       active-class="active">{{ crumb.title }}
+  </div>
+</nav>
 </template>
 
 <script lang="babel">
+import inherit from '../mixins/inheritComponents'
+
 export default {
   props: {
     links: {
@@ -24,12 +27,10 @@ export default {
     crumbs () {
       const links = this.links
 
-      if (typeof (links[0]) === 'string') {
-        return links.map(link => ({ link, title: link }))
-      }
-
-      return links
+      return links.map(link => (typeof (link) === 'string' ? { link, title: link } : link))
     }
-  }
+  },
+
+  mixins: [inherit]
 }
 </script>

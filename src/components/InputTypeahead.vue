@@ -21,6 +21,7 @@
 import inputHelper from '../mixins/inputHelper'
 import TypeaheadField from './Typeahead.vue'
 import { mapObject } from '../utils'
+import inherit from '../mixins/inheritComponents'
 
 export default {
   name: 'InputTypeahead',
@@ -74,6 +75,7 @@ export default {
   },
 
   components: { TypeaheadField },
-  mixins: [inputHelper]
+
+  mixins: [inputHelper, inherit]
 }
 </script>

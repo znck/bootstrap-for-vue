@@ -19,6 +19,8 @@
 </template>
 
 <script lang="babel">
+import inherit from '../mixins/inheritComponents'
+
 export default {
   props: {
     show: {
@@ -54,7 +56,9 @@ export default {
       type: String,
       default: 'div'
     }
-  }
+  },
+
+  mixins: [inherit]
 }
 
 </script>

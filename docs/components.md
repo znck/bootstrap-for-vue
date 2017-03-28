@@ -1,5 +1,5 @@
 # Components
--- Description. --
+Checkout out [Vue docs](https://vuejs.org/v2/guide/components.html#What-are-Components) to know about components. 
 
 ## Input Components
 
@@ -1010,10 +1010,22 @@ dismiss | - | Emitted on dismiss button click
 
 ````vue
 <div id="app">
-  <breadcrumb>
-    
-  </breadcrumb>
+  <breadcrumb v-bind="{ links }"></breadcrumb>
 </div>
+
+<script>
+new Vue({
+  el: '#app',
+  
+  data: () => ({ 
+    links: [
+      { link: '/foo', title: 'Foo' },
+      { link: { path: '/bar' }, title: 'Bar' },
+      'baz'
+    ]
+  })
+})
+</script>
 ````
 
 #### Dropdown

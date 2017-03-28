@@ -43,7 +43,7 @@ const config = {
     })
   ],
 
-  url: 'http://bootstrap-for-vue.znck.me'
+  // url: 'http://bootstrap-for-vue.znck.me'
 }
 
 docute.init(config)

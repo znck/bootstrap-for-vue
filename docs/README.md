@@ -1,6 +1,5 @@
 ---
 sidebar: false
-
 ---
 
 <div class="text-xs-center" align="center" style="margin: 20px">
