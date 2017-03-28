@@ -12,7 +12,7 @@ sidebar: false
 </div>
 
 ## Introduction
-**Bootstrap for Vue** is collection of bootstrap 4 based reusable components. It is used by 
+**Bootstrap for Vue** is collection of bootstrap 4 based reusable components, (no jquery, no tether, no bootstrap.js). It is used by 
 [Vue Issue](https://new-issue.vuejs.org) and [Zero](https://zero.institute).
  
 It would always support [Vue InterOp](https://github.com/znck/vue-interop) standards.
@@ -28,6 +28,8 @@ npm install bootstrap-for-vue
 ```
 
 ## Usage
+
+<p class="tip">Bootstrap CSS is required and it is not included.<p>
 
 #### In browser
 
