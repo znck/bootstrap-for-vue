@@ -984,7 +984,7 @@ Alert with `message` prop.
   new Vue({
     el: '#app',
     
-    data: () => ({ text: 'This is a non-dismissible alert message.' })
+    data: () => ({ text: 'This is an alert message.' })
   })
 </script>
 ````
@@ -1007,6 +1007,14 @@ Name | Payload | Description
 dismiss | - | Emitted on dismiss button click 
 
 #### Breadcrumb
+
+````vue
+<div id="app">
+  <breadcrumb>
+    
+  </breadcrumb>
+</div>
+````
 
 #### Dropdown
 

@@ -1,22 +1,16 @@
+import '../components/Tooltip.vue'
+
 export default {
   bind (el, binding) {
-    el.setAttribute('data-title', binding.value)
+    const position = binding.arg ? `${binding.arg}-center`.split('-').slice(0, 2).join(' ') : 'bottom center'
 
-    jQuery(el).tooltip({
-      animation: false,
-      html: binding.modifiers.html || false,
-      placement: binding.arg || 'bottom',
-      trigger: 'hover'
-    })
+    el.setAttribute('data-tooltip', binding.value)
+    el.setAttribute('data-position', position)
   },
 
   update (el, binding) {
     if (binding.value !== binding.oldValue) {
-      el.setAttribute('data-original-title', binding.value)
+      el.setAttribute('data-tooltip', binding.value)
     }
-  },
-
-  unbind (el) {
-    jQuery(el).tooltip('hide').tooltip('dispose')
   }
 }
