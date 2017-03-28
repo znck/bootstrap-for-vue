@@ -872,8 +872,6 @@ const NameComp = {
   props: ['active', 'selected', 'item'] // - required props.
 }
 
-Vue.component('NameComp', NameComp)
-
 new Vue({
   el: '#app',
   
@@ -885,7 +883,9 @@ new Vue({
       { id: 2, name: 'Jane Doe' },
       { id: 3, name: 'Bruce Lee' },
     ]
-  }
+  },
+  
+  components: { NameComp }
 })
 </script>
 ````
@@ -1027,6 +1027,16 @@ new Vue({
 })
 </script>
 ````
+<p class="warning">
+Breadcrumb items use `<router-link>` component.
+</p>
+
+
+##### Props
+Name                  | Type                    | Default               | Required | Remarks
+----------------------|-------------------------|-----------------------|----------|-----------
+links                 | Array                   | -                     | Yes      | List of items/links.
+component             | String                 | `'router-link'`        | -        | Name of local or global component.
 
 #### Dropdown
 

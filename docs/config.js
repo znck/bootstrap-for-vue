@@ -28,11 +28,6 @@ const config = {
         <style>
         [id^=app] { padding: 16px }
         </style>
-
-        <!-- require bootstrap -->
-        <script src="https://unpkg.com/jquery@3.1.1/dist/jquery.min.js"></script>
-        <script src="https://unpkg.com/tether@1.4.0/dist/js/tether.min.js"></script>
-        <script src="https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/js/bootstrap.min.js"></script>
         
         <!-- require vue -->
         <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
