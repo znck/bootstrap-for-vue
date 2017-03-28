@@ -2,7 +2,7 @@
   <img src="./docs/assets/images/logo.png" height="255">
 </div>
 
-<div style="text-align: center">
+<div class="text-xs-center" align="center">
 
 [![npm](https://img.shields.io/npm/v/bootstrap-for-vue.svg)](https://www.npmjs.com/package/bootstrap-for-vue)
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
