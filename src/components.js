@@ -3,7 +3,7 @@ export { default as Alert, default as VbAlert } from './components/Alert.vue'
 export { default as Breadcrumb, default as VbBreadcrumb } from './components/Breadcrumb.vue'
 export { default as Dropdown, default as VbDropdown } from './components/Dropdown.vue'
 export { default as Icon, default as VbIcon } from './components/Icon.vue'
-export { default as Modal, default as VbModel } from './components/Modal'
+export { default as Modal, default as VbModel } from './components/Modal.vue'
 export { default as Search, default as VbSearch } from './components/Search.vue'
 export { default as Typeahead, default as VbTypeahead } from './components/Typeahead.vue'
 

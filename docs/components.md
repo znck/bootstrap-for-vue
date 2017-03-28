@@ -1007,7 +1007,9 @@ Name | Payload | Description
 dismiss | - | Emitted on dismiss button click 
 
 #### Breadcrumb
+Indicate the current page’s location within a navigational hierarchy.
 
+##### Examples
 ````vue
 <div id="app">
   <breadcrumb v-bind="{ links }"></breadcrumb>
@@ -1027,10 +1029,6 @@ new Vue({
 })
 </script>
 ````
-<p class="warning">
-Breadcrumb items use `<router-link>` component.
-</p>
-
 
 ##### Props
 Name                  | Type                    | Default               | Required | Remarks
@@ -1038,16 +1036,42 @@ Name                  | Type                    | Default               | Requir
 links                 | Array                   | -                     | Yes      | List of items/links.
 component             | String                 | `'router-link'`        | -        | Name of local or global component.
 
-#### Dropdown
-
 #### Modal
+Modals are streamlined, but flexible dialog prompts.
 
-#### Icon
+##### Examples
+````vue
+<div id="app">
+  <input-button @click.native="open = true">Open Modal</input-button>
 
-#### SmartForm
+  <modal title="A Modal" v-bind="{ open }" @close="open = false" custom>
+  <div class="card card-block">
+    Hello <strong>World!</strong> <br>
+    
+    This is a modal.
+  </div>
+  </modal>
+</div>
+
+<script>
+new Vue({ 
+  el: '#app',
+  
+  data: () => ({ open: false })
+})
+</script>
+````
 
 ## Internals
 
+#### Dropdown
+Used in `<Typeahead>`.
+
+#### Icon
+FontAwesome icon wrapper. Used in `<InputButton>`.
+
 #### Search
+Used in `<Typeahead>` & `<InputSearch>`.
 
 #### Typeahead
+Used in `<InputTypeahead>`.

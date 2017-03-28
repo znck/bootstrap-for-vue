@@ -11,7 +11,7 @@ const config = {
     { title: 'Directives', path: '/directives' },
     { title: 'Mixins', path: '/mixins' },
     { title: 'Styles', path: '/styles' },
-    { title: 'Helpers', path: '/helpers' },
+    // { title: 'Helpers', path: '/helpers' },
   ],
 
   plugins: [
@@ -38,7 +38,7 @@ const config = {
     })
   ],
 
-  // url: 'http://bootstrap-for-vue.znck.me'
+  url: 'http://bootstrap-for-vue.znck.me'
 }
 
 docute.init(config)
